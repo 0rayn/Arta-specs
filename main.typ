@@ -1,9 +1,10 @@
+#set text(font: ("Linux Libertine", "DejaVu Sans", "Liberation Sans"))
+
 #import "lib/tarbit-theme.typ": tarbit-doc, lexicon
 
 #show: tarbit-doc.with(
   title: "ARTA: The Language of YonaOS"
 )
-
 
 #include "src/00-prologue.typ"
 #pagebreak()

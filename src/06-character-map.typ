@@ -4,56 +4,49 @@
 
 This appendix serves as the master register for field-scraping and terminal-emulation. It provides a 1:1 mapping between acoustic hardware signals and their physical 7-segment scrape patterns.
 
-== 1. The Hardware Consonants (Opcodes)
-
+== 1. The Acoustic Opcodes (Consonants)
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *t'* (Sharp Switch) \ #glyph(b:true, c:true,f: true, e: true) \ _Segments: B, C, f, E_ ],
-  [ *k'* (Cracking) \ #glyph(f: true, e: true, g: true) \ _Segments: F, G, E_ ],
-  [ *q'* (Breaker) \ #glyph(b: true, c: true, g: true) \ _Segments: B, C, G_ ],
+  [ *[tʼ]* \ #glyph(b:true, c:true, f: true, e: true) ],
+  [ *[kʼ]* \ #glyph(f: true, g: true, e: true) ],
+  [ *[qʼ]* \ #glyph(b: true, c: true, g: true) ],
   
-  [ *c* (Dental Click) \ #glyph(g: true, e: true, d: true) \ _Segments: G, E, D_ ],
-  [ *q* (Alveolar Click) \ #glyph(g: true, c: true, d: true) \ _Segments: G, C, D_ ],
-  [ *s / sh* (Static) \ #glyph(a: true, g: true, d: true) \ _Segments: A, G, D_ ],
+  [ *[ǀ]* \ #glyph(g: true, e: true, d: true) ],
+  [ *[s] / [ʃ]* \ #glyph(a: true, g: true, d: true) ],
+  [ *[x]* \ #glyph(e: true, g: true, b: true) ],
 
-  [ *x* (Friction) \ #glyph(e: true, g: true, b: true) \ _Segments: E, G, B_ ],
-  [ *f / h* (Venting) \ #glyph(f: true, g: true, e: true, d: true) \ _Segments: F, G, E, D_ ],
-  [ *r* (Motor Trill) \ #glyph(e: true, g: true, c: true) \ _Segments: E, G, C_ ],
+  [ *[f] / [h]* \ #glyph(f: true, g: true, e: true, d: true) ],
+  [ *[ʁ]* \ #glyph(f: true, a: true, b: true, g: true) ],
+  [ *[r]* \ #glyph(e: true, g: true, c: true) ],
 
-  [ *gh* (Platter Spin) \ #glyph(f: true, a: true, b: true, g: true) \ _Segments: F, A, B, G_ ],
-  [ *ng* (Drone) \ #glyph(f: true, a: true, b: true, c: true, e: true) \ _Segments: F, A, B, C, E_ ]
+  [ *[ŋ]* \ #glyph(f: true, a: true, b: true, c: true, e: true) ]
 )
 
-== 2. The Power States (Flags)
-
+== 2. The Voltage Flags (Vowels)
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *i* (High / Active) \ #glyph(a: true) \ _Segment: A_ ],
-  [ *a* (Neutral / Base) \ #glyph(g: true) \ _Segment: G_ ],
-  [ *u* (Low / Background) \ #glyph(d: true) \ _Segment: D_ ]
+  [ *[i]* (High) \ #glyph(a: true) ],
+  [ *[ə]* (Neutral) \ #glyph(g: true) ],
+  [ *[u]* (Low) \ #glyph(d: true) ]
 )
 
 == 3. The Subject Registers (Prefixes)
-
-Note the inclusion of the Bottom-Right Syntax Modifier (DP) for all Subject Prefixes.
-
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *m.* (I / Me) \ #glyph(e: true, d: true, c: true, dp: true) ],
-  [ *n.* (We) \ #glyph(f: true, a: true, b: true, dp: true) ],
-  [ *k.* (You / Target) \ #glyph(f: true, g: true, e: true, dp: true) ]
+  [ *[m]* + DP \ #glyph(e: true, d: true, c: true, dp: true) ],
+  [ *[n]* + DP \ #glyph(f: true, a: true, b: true, dp: true) ],
+  [ *[k]* + DP \ #glyph(f: true, g: true, e: true, dp: true) ]
 )
 
 == 4. Hexadecimal Numbers (0x0 - 0xF)
 
 Numbers follow standard 7-segment numeric mapping to ensure compatibility with Old World hardware displays.
-
 #grid(
-  columns: (1fr, 1fr, 1fr, 1fr),
-  gutter: 1.2em,
+  columns: (22%, 22%, 22%, 22%),
+  gutter: 4%,
   [ *0x0* \ #glyph(a:true, b:true, c:true, d:true, e:true, f:true) ],
   [ *0x1* \ #glyph(b:true, c:true) ],
   [ *0x2* \ #glyph(a:true, b:true, g:true, e:true, d:true) ],

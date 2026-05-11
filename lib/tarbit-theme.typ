@@ -11,7 +11,7 @@
 #let hex-dump(content) = text(font: "Liberation Mono", size: 7pt, fill: luma(150), tracking: 0.2em, content)
 
 #let tarbit-doc(title: "", body) = {
-  let terminal-font = ("Liberation Mono", "DejaVu Sans Mono", "mono")
+  let terminal-font = ("Liberation Mono", "DejaVu Sans Mono")
 
   // 3. The Background Grid Pattern
   let eng-grid = tiling(size: (20pt, 20pt))[
@@ -100,7 +100,7 @@
 // THE DICTIONARY MACRO
 // ==========================================
 #let lexicon(arta, english, sounds, pos) = {
-  let terminal-font = ("Liberation Mono", "DejaVu Sans Mono", "mono")
+  let terminal-font = ("Liberation Mono", "DejaVu Sans Mono")
   v(1em)
   block(
     width: 100%,
