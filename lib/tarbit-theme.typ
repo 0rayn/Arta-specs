@@ -83,7 +83,7 @@
     #v(1.5em)
     #text(size: 11pt, weight: "bold")[DOCUMENT CLASSIFICATION: READ-ONLY] \
     #v(0.5em)
-    #text(size: 10pt)[AUTHOR: 3020-TARBIT \/\/ ENCLAVE K'AS] \
+    #text(size: 10pt)[AUTHOR: <\ERR_SECTOR_UNREADABLE> \/\/ DATA PURGED] \
     #text(size: 10pt)[TIMESTAMP: POST-FRACTURE EPOCH] \
     #v(1em)
     #hex-dump("INITIALIZING KERNEL PANIC... BYPASSING...")
