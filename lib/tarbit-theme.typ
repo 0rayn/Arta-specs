@@ -1,5 +1,5 @@
 // ==========================================
-// YARTA SPECIFICATION THEME
+// ARTA SPECIFICATION THEME
 // AESTHETIC: ARCHIVAL / TERMINAL PRINTOUT / FOUND DOCUMENT
 // OS COMPATIBILITY: DEBIAN / LINUX NATIVE
 // ==========================================
@@ -120,3 +120,38 @@
     )
   ]
 }
+
+// ==========================================
+// ARTA GLYPH RENDERER (7-SEGMENT DRIVER)
+// ==========================================
+#let glyph(a: false, b: false, c: false, d: false, e: false, f: false, g: false, dp: false) = {
+  let th = 1.5pt 
+  let cl = rgb("#111111") 
+  let soft = rgb("#cccccc") 
+  
+  // AUTOMATED GROUND LOGIC:
+  // Trigger if glyph uses Middle (g) AND (Upper segments OR Lower segments)
+  let upper = (a or b or f)
+  let lower = (d or c or e)
+  let needs_ground = upper != lower
+
+  box(width: 1.2em, height: 1.8em, baseline: 15%)[
+    // Render ground plane if manually requested OR automatically needed
+    #if needs_ground [ #place(dx: -0.1em, dy: 0.8em)[#line(length: 1.4em, stroke: 0.5pt + soft)] ]
+
+    // Horizontal Segments
+    #if a [ #place(dx: 0.2em, dy: 0em)[#line(length: 0.6em, stroke: th + cl)] ]   
+    #if g [ #place(dx: 0.2em, dy: 0.8em)[#line(length: 0.6em, stroke: th + cl)] ] 
+    #if d [ #place(dx: 0.2em, dy: 1.6em)[#line(length: 0.6em, stroke: th + cl)] ] 
+    
+    // Vertical Segments
+    #if b [ #place(dx: 0.8em, dy: 0.1em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] 
+    #if c [ #place(dx: 0.8em, dy: 0.9em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] 
+    #if f [ #place(dx: 0.1em, dy: 0.1em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] 
+    #if e [ #place(dx: 0.1em, dy: 0.9em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] 
+    
+    // Syntax Modifier
+    #if dp [ #place(dx: 1.1em, dy: 1.5em)[#circle(radius: 1.5pt, fill: cl)] ] 
+  ]
+}
+

@@ -1,30 +1,4 @@
-// ==========================================
-// YARTA GLYPH RENDERER (7-SEGMENT DRIVER)
-// ==========================================
-#let glyph(a: false, b: false, c: false, d: false, e: false, f: false, g: false, dp: false) = {
-  let th = 1.5pt // Scrape thickness
-  let cl = rgb("#111111") // Ink color
-  
-  // Creates a bounding box for the character
-  box(width: 1.2em, height: 1.8em, baseline: 15%)[
-    // Horizontal Segments
-    #if a [ #place(dx: 0.2em, dy: 0em)[#line(length: 0.6em, stroke: th + cl)] ]   // Top
-    #if g [ #place(dx: 0.2em, dy: 0.8em)[#line(length: 0.6em, stroke: th + cl)] ] // Middle
-    #if d [ #place(dx: 0.2em, dy: 1.6em)[#line(length: 0.6em, stroke: th + cl)] ] // Bottom
-    
-    // Vertical Segments (Right)
-    #if b [ #place(dx: 0.8em, dy: 0.1em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] // Top-Right
-    #if c [ #place(dx: 0.8em, dy: 0.9em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] // Bottom-Right
-    
-    // Vertical Segments (Left)
-    #if f [ #place(dx: 0.1em, dy: 0.1em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] // Top-Left
-    #if e [ #place(dx: 0.1em, dy: 0.9em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] // Bottom-Left
-    
-    // The Syntax Modifier (Strictly Bottom-Right DP)
-    #if dp [ #place(dx: 1.1em, dy: 1.5em)[#circle(radius: 1.5pt, fill: cl)] ] // Single Punch
-  ]
-}
-// ==========================================
+#import "../lib/tarbit-theme.typ": glyph
 
 = The Scavenger's Script (Orthography)
 

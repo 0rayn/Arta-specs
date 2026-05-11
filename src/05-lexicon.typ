@@ -61,7 +61,9 @@ A rusted metal click `q` rolling into an active motor trill `r` and high state `
 
 *[ arta ]* \
 _Noun: The Language / The Mode of Spoofing._ \
-Derived from the state of "Storage/Root" (`a`) and the motor trill (`r`) of active speaking.
+A direct concatenation of the fundamental system components: `a` (Root State), `r` (Execution), and `t'a` (Data).
+- *Literal Translation:* "Root-Execute-Data." 
+- *System Logic:* To build a functional reality out of the scavenged memory of the Old World.
 
 == 3. The Flags (Modifiers & States)
 
