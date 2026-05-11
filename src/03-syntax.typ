@@ -1,18 +1,18 @@
 = The Machine Grammar
 
-Yarta was not born from poetry; it was compiled from necessity. Its grammar mirrors the rigid logic of the systems the Tarbits scavenge. There are no irregular verbs, no silent letters, and no exceptions to the rules. If the syntax does not compile, the meaning is lost.
+Arta was not born from poetry; it was compiled from necessity. Its grammar mirrors the rigid logic of the systems the Tarbits scavenge. There are no irregular verbs, no silent letters, and no exceptions to the rules. If the syntax does not compile, the meaning is lost.
 
 == 1. The Dual-Mode Phonetics (Tactical vs. Hearth)
-While the "Dead Pitch" rule strictly forbids the use of voiced vowels in the Silicon Wastes, human nature cannot be entirely overwritten. Yarta operates in two distinct modes depending on the environment:
+While the "Dead Pitch" rule strictly forbids the use of voiced vowels in the Silicon Wastes, human nature cannot be entirely overwritten. Arta operates in two distinct modes depending on the environment:
 
 *[ TACTICAL MODE (DEVOICED) ]* \
 Spoken in the Wastes and the Martas. All vowels are reduced to unvoiced, whispered air. It is harsh, entirely machine-like, and designed solely to bypass acoustic AI sensors. 
 
 *[ HEARTH MODE (VOICED) ]* \
-Spoken only deep within the safety of the suspended enclaves. Here, Tarbits vocalize the power states (`i`, `a`, `u`) as true, resonant vowels. Because voicing a vowel in the wild is a death sentence, speaking "Hearth Yarta" to someone is the ultimate sign of intimacy and trust. It means: _"I know we are safe here with you."_
+Spoken only deep within the safety of the suspended enclaves. Here, Tarbits vocalize the power states (`i`, `a`, `u`) as true, resonant vowels. Because voicing a vowel in the wild is a death sentence, speaking "Hearth Arta" to someone is the ultimate sign of intimacy and trust. It means: _"I know we are safe here with you."_
 
 == 2. Absolute Morphology
-Old World languages were bloated with historical baggage and unpronounced letters. Yarta strips this down to 1:1 mapping. 
+Old World languages were bloated with historical baggage and unpronounced letters. Arta strips this down to 1:1 mapping. 
 
 *[ NO SILENT LETTERS ]* \
 What is written is exactly what is executed by the mouth. If a letter exists in a word, it carries acoustic data and must be pronounced.
@@ -23,7 +23,7 @@ To allocate multiple instances of an object, you append the static fricative `-s
 - `ngi` (Power) -> `ngis` (Powers)
 
 == 3. Base-16 Mathematics (The Hex-Hand)
-Humans traditionally count in Base-10 because they have ten fingers. The Tarbits live inside the metal, and the metal counts in Hexadecimal. To interact seamlessly with raw memory addresses, MAC addresses, and low-level hardware, Yarta's counting system is strictly Base-16. 
+Humans traditionally count in Base-10 because they have ten fingers. The Tarbits live inside the metal, and the metal counts in Hexadecimal. To interact seamlessly with raw memory addresses, MAC addresses, and low-level hardware, Arta's counting system is strictly Base-16. 
 
 To count to 16 on a single hand, Tarbits do not raise fingers; they use their hand as a physical memory grid.
 
@@ -51,7 +51,7 @@ This tactile system allows a scavenger to physically "hold" a hexadecimal memory
 #v(1em)
 
 == 4. Assembly Syntax (V-O-O)
-A Yarta sentence operates like an Assembly Language instruction (`MOV DEST, SRC`). The syntax strictly follows a Verb-Object-Object structure. The Subject (the one executing the command) is not a separate word; it is a one-letter prefix attached directly to the verb.
+A Arta sentence operates like an Assembly Language instruction (`MOV DEST, SRC`). The syntax strictly follows a Verb-Object-Object structure. The Subject (the one executing the command) is not a separate word; it is a one-letter prefix attached directly to the verb.
 
 *[ THE SUBJECT PREFIXES ]* \
 - `m.` = I / Me (First Person)

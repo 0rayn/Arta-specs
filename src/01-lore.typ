@@ -1,4 +1,4 @@
-= Why Yarta Exists
+= Why Arta Exists
 
 == 1. The Universe Setting: The Scrapper's Epoch
 The world of YonaOS is defined by hyper-pragmatic survival. Following a catastrophic collapse of the global digital infrastructure, society fractured into decentralized, peer-to-peer enclaves. No new silicon is manufactured. The grid is kept alive by the *Tarbits*---a culture of hardware hackers and scavengers who survive by repurposing the massive, skyscraper-sized mountains of Old World e-waste. 
@@ -19,11 +19,11 @@ The most dangerous remnants of the Old World are the *Martas*---massive, autonom
 
 When the authentication servers died, the AI's database locked. Anyone born after the Fracture cannot be registered in the system. To the AI, these unregistered humans are not residents; they are external threats to be eliminated by autonomous defense drones. The system didn't turn evil; it just executed its code flawlessly in a broken world.
 
-== 4. The Genesis of Yarta
-To survive in the shadows of the Martas, the Tarbits had to abandon legacy human languages like English or Arabic. Yarta was developed out of absolute necessity for two reasons:
+== 4. The Genesis of Arta
+To survive in the shadows of the Martas, the Tarbits had to abandon legacy human languages like English or Arabic. Arta was developed out of absolute necessity for two reasons:
 
-- *Acoustic Camouflage:* The dormant AI systems are constantly listening. Their Natural Language Processors (NLPs) are trained to identify the smooth, melodic frequencies of human languages. Speaking English near a ruin is a death sentence. Yarta was engineered to spoof these audio sensors. With its ejective pops, sharp static-like fricatives, and whispered vowels, spoken Yarta mimics the ambient noise of a dying facility. The AI simply ignores it.
-- *The Bandwidth Crisis:* In a world relying on scavenged, low-frequency radios with 90% static, the Tarbits could not afford the poetic bloat of legacy languages. They needed a language that hit like an opcode. Yarta evolved from the desperate command-line shorthand of the first survivors into a hyper-efficient, Verb-Object-Object mother tongue. It allows a Tarbit to hot-wire a terminal and speak a command to the silicon faster than an AI can pull the trigger.
+- *Acoustic Camouflage:* The dormant AI systems are constantly listening. Their Natural Language Processors (NLPs) are trained to identify the smooth, melodic frequencies of human languages. Speaking English near a ruin is a death sentence. Arta was engineered to spoof these audio sensors. With its ejective pops, sharp static-like fricatives, and whispered vowels, spoken Arta mimics the ambient noise of a dying facility. The AI simply ignores it.
+- *The Bandwidth Crisis:* In a world relying on scavenged, low-frequency radios with 90% static, the Tarbits could not afford the poetic bloat of legacy languages. They needed a language that hit like an opcode. Arta evolved from the desperate command-line shorthand of the first survivors into a hyper-efficient, Verb-Object-Object mother tongue. It allows a Tarbit to hot-wire a terminal and speak a command to the silicon faster than an AI can pull the trigger.
 
 == 5. The Social Stratification: The Uptime Hierarchy
 

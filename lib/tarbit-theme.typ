@@ -99,7 +99,7 @@
 // ==========================================
 // THE DICTIONARY MACRO
 // ==========================================
-#let lexicon(yarta, english, sounds, pos) = {
+#let lexicon(arta, english, sounds, pos) = {
   let terminal-font = ("Liberation Mono", "DejaVu Sans Mono", "mono")
   v(1em)
   block(
@@ -114,7 +114,7 @@
       columns: (1fr, 3fr),
       row-gutter: 8pt,
       align: (left, left),
-      [*ROOT:* #text(size: 12pt, weight: "bold", upper(yarta))], [*CLASS:* #upper(pos)],
+      [*ROOT:* #text(size: 12pt, weight: "bold", upper(arta))], [*CLASS:* #upper(pos)],
       [*DEF :*], [#english],
       [*SIG :*], [_ #sounds _]
     )

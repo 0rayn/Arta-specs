@@ -30,15 +30,15 @@
 
 In the Wastes, there is no paper and there is no ink. Tarbits write with screwdrivers, combat knives, and soldering irons on rusted server chassis and blast doors. 
 
-Because carving curves into metal is slow, loud, and leaves jagged edges, the physical Yarta script is entirely angular.
+Because carving curves into metal is slow, loud, and leaves jagged edges, the physical Arta script is entirely angular.
 
 == 1. The 7-Segment Scrape
 
-The alphabet is directly repurposed from the most common piece of intact Old World e-waste: the 7-segment digital LED display. Every character in Yarta is formed by carving a specific combination of these 7 straight lines. 
+The alphabet is directly repurposed from the most common piece of intact Old World e-waste: the 7-segment digital LED display. Every character in Arta is formed by carving a specific combination of these 7 straight lines. 
 
 == 2. The Subject Marker (The Decimal Point)
 
-In Yarta's machine syntax, every verb must have a Subject Prefix (`m.`, `n.`, `k.`). To prevent these prefixes from being misread as standalone nouns or verbs, Tarbits use the physical Decimal Point (DP) located at the bottom-right of the display housing as a Syntax Modifier.
+In Arta's machine syntax, every verb must have a Subject Prefix (`m.`, `n.`, `k.`). To prevent these prefixes from being misread as standalone nouns or verbs, Tarbits use the physical Decimal Point (DP) located at the bottom-right of the display housing as a Syntax Modifier.
 
 When the DP is violently punched or drilled out next to a letter, it casts that letter as the executing Subject.
 

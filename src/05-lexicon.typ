@@ -1,6 +1,6 @@
 = The Scavenger's Lexicon: V1.0
 
-This lexicon contains the fundamental root-words of Yarta. Remember: all roots are strictly Verb-Object-Object (V-O-O). Subjects are never separate words; they are prefixes (`m.`, `n.`, `k.`) attached to the verb.
+This lexicon contains the fundamental root-words of Arta. Remember: all roots are strictly Verb-Object-Object (V-O-O). Subjects are never separate words; they are prefixes (`m.`, `n.`, `k.`) attached to the verb.
 
 To ensure future expansions remain organized, vocabulary is categorized by its function within the machine logic.
 
@@ -59,7 +59,7 @@ _Noun: Enemy Drone / Active Threat._ \
 A rusted metal click `q` rolling into an active motor trill `r` and high state `i`.
 - *Plural:* `qris`
 
-*[ yarta ]* \
+*[ arta ]* \
 _Noun: The Language / The Mode of Spoofing._ \
 Derived from the state of "Storage/Root" (`a`) and the motor trill (`r`) of active speaking.
 

@@ -46,7 +46,7 @@
   
   The veteran turns back to the humming fortress, his hand resting on the mechanical keyboard strapped to his chest.
   
-  "The system didn't turn evil. It just executed its code. It eliminated the 'threats' until there was no one left to protect. That's why we move quiet, and that's why we don't speak English in there. If we trip a sensor, we have exactly three seconds to hardwire a terminal and speak Yarta faster than the AI can pull the trigger."
+  "The system didn't turn evil. It just executed its code. It eliminated the 'threats' until there was no one left to protect. That's why we move quiet, and that's why we don't speak English in there. If we trip a sensor, we have exactly three seconds to hardwire a terminal and speak Arta faster than the AI can pull the trigger."
   
   The veteran types a fast, blind command on his deck. A green light flashes on his wrist.
   

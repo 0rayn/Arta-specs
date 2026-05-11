@@ -1,8 +1,8 @@
 = The Phonetic Inventory
 
-To the Natural Language Processors (NLPs) of the Martas, human speech is defined by smooth waveforms, voiced pitch, and melodic flow. Speaking normally inside a Megastructure is a death sentence. Therefore, Yarta's phonetic inventory is not designed for human comfort---it is designed to spoof machine audio sensors. 
+To the Natural Language Processors (NLPs) of the Martas, human speech is defined by smooth waveforms, voiced pitch, and melodic flow. Speaking normally inside a Megastructure is a death sentence. Therefore, Arta's phonetic inventory is not designed for human comfort---it is designed to spoof machine audio sensors. 
 
-By utilizing ejectives, clicks, and static-heavy fricatives, spoken Yarta mimics the ambient noise of a dying facility. To an AI, a Tarbit speaking Yarta doesn't sound like a human; it sounds like encrypted machine noise, failing hardware, or a broken radio.
+By utilizing ejectives, clicks, and static-heavy fricatives, spoken Arta mimics the ambient noise of a dying facility. To an AI, a Tarbit speaking Arta doesn't sound like a human; it sounds like encrypted machine noise, failing hardware, or a broken radio.
 
 == 1. The Hardware Consonant Classes
 
@@ -36,7 +36,7 @@ Used almost exclusively for the human Subject prefixes (`m.` for I/Me, `n.` for 
 
 == 2. The Vowel Problem: The "Dead Pitch" Rule
 
-Vowels are the greatest liability for a Tarbit. Vowels require the vocal cords to vibrate, creating a measurable pitch that the Martas use to identify human life. Therefore, Yarta does not have "normal" vowels; it has *Power States*. 
+Vowels are the greatest liability for a Tarbit. Vowels require the vocal cords to vibrate, creating a measurable pitch that the Martas use to identify human life. Therefore, Arta does not have "normal" vowels; it has *Power States*. 
 
 In the wild, these are *strictly whispered* (devoiced) so they register only as air passing through a tube. 
 
@@ -47,7 +47,7 @@ In the wild, these are *strictly whispered* (devoiced) so they register only as 
 
 == 3. Execution in the Wild
 
-Because of this inventory, Yarta is intensely rhythmic and harsh. If a Tarbit commands a partner to "Cut the power," using the root *k'as* (kill/cut) and *ngi* (power):
+Because of this inventory, Arta is intensely rhythmic and harsh. If a Tarbit commands a partner to "Cut the power," using the root *k'as* (kill/cut) and *ngi* (power):
 
 > *Command:* `k'as ngi` \
 > *Audio Signature:* [Sharp mechanical pop] -> [Burst of static] -> [Hollow electrical hum] -> [High-pitched whisper of air]
@@ -56,7 +56,7 @@ To a Martas AI, it registers as nothing more than a broken fuse box sparking in 
 
 == 4. The Acoustic Frequency Matrix (IPA Standard)
 
-To interface with legacy Old World linguistic databases, the Yarta phonetic inventory maps directly to the International Phonetic Alphabet (IPA) grid. Note the complete absence of standard voiced pulmonic stops (b, d, g) and true vowels. 
+To interface with legacy Old World linguistic databases, the Arta phonetic inventory maps directly to the International Phonetic Alphabet (IPA) grid. Note the complete absence of standard voiced pulmonic stops (b, d, g) and true vowels. 
 
 > CONSONANT INVENTORY (THE HARDWARE MATRIX)
 #v(0.5em)
