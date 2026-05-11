@@ -1,4 +1,4 @@
-# YARTA: The Language of YonaOS
+# ARTA: The Language of YonaOS
 > **SYS_ARCHIVE // FRAGMENT-RESTORED // CHK: 88A9**
 
 Arta is a bare-metal constructed language (conlang) and artistic world-building project designed for the **YonaOS** universe. It is a language built not from poetry, but compiled from sheer necessity. 
