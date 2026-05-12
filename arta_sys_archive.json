@@ -19,5 +19,18 @@
     "f a c": "verb: To securely flush a buffer or drop a software connection.",
     "t' i k'": "noun: A logical pointer directing execution to a specific hardware address.",
     "s u ng": "noun: A temporary data buffer or holding queue.",
-    "x a": "noun: An empty, unwritten sector of memory; a null pointer."
+    "x a": "noun: An empty, unwritten sector of memory; a null pointer.",
+    "m.": "prefix: [FIRST PERSON] Binds the opcode execution to the speaker (I/Me).",
+    "n.": "prefix: [FIRST PLURAL] Binds the opcode execution to the speaker's group (We).",
+    "k.": "prefix: [SECOND PERSON] Binds the opcode execution to the target entity (You).",
+    "i.": "modifier: [QUEUED] The High-State dot. Indicates an action scheduled to happen (Future).",
+    "a.": "modifier: [ACTIVE] The Neutral-State dot. Indicates an action currently executing (Present).",
+    "u.": "modifier: [LOGGED] The Low-State dot. Indicates an action that has concluded and written to memory (Past).",
+    "c.": "modifier: [GATE] The Relay dot. Evaluates the following phrase as a condition (IF).",
+    "x.": "modifier: [NOT] The Friction dot. Inverts or nullifies the following opcode or register (NO/FALSE).",
+    "f.": "modifier: [VECTOR IN] The Vent dot. Indicates movement into or location inside a structure or port.",
+    "h.": "modifier: [VECTOR OUT] The Exhaust dot. Indicates movement out of or location external to a structure.",
+    "s.": "modifier: [VECTOR HIGH] The Static dot. Indicates location above, on top of, or at a higher physical elevation.",
+    "ng.": "modifier: [VECTOR LOW] The Drone dot. Indicates location below, underneath, or grounded beneath an object.",
+    "t'.": "modifier: [VECTOR PIN] The Switch dot. Indicates an exact, physical connection or adjacent location (at/on)."
 }

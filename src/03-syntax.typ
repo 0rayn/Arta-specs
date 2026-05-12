@@ -63,3 +63,66 @@ To build a sentence, you attach the prefix to the root verb, followed by the tar
 *Example:* If `[tʼ ə r]` is "to build", and `[ŋ i]` is "power":
 - `[m.tʼ ə r] [ŋ i]` = "I build power."
 - `[k.kʼ ə s] [ŋ i]` = "You kill the power."
+
+== 5. The Execution Queue (Timeline Flags)
+
+In Arta, time is not a fluid, philosophical concept; it is a system log. A Tarbit does not speak in past, present, or future tenses. Instead, they treat time as an *Execution Queue*. 
+
+To indicate when an action happens, a Tarbit prepends the entire instruction with a *Timeline Flag*---a Power State bound to a Decimal Point (`.`)---acting as a header byte for the data packet. If no flag is present, the action defaults to the Present (Executing).
+
+*[ THE QUEUE STATES ]*
+- *[i.] (High State / Queued):* The instruction is scheduled. Represents the Future Tense.
+- *[ə.] (Neutral State / Active):* The instruction is executing now. Represents the Present Tense.
+- *[u.] (Low State / Logged):* The instruction has concluded and is cached. Represents the Past Tense.
+
+*[ TIMELINE ASSEMBLY ]*
+The timeline flag is spoken as a sharp, standalone whisper before the main command.
+
+> `[FLAG] [PREFIX].[VERB] [OBJECT]`
+
+*Examples:*
+- `[i.] [m.tʼ ə r] [a r tʼ a]` = "Target Queue: I will build the Arta system."
+- `[u.] [k.kʼ ə s] [ŋ i]` = "Cached Log: You killed the power."
+
+== 6. Logic Gates (Branching and Negation)
+
+A Tarbit cannot rely purely on linear execution; survival requires conditional logic. Arta uses "Dotted" Logic Gates to create IF/THEN statements and Nullifiers.
+
+*[ THE COMPARE GATE (IF) ]* \
+To create a condition, append the `[c.]` (Relay Gate) modifier to the front of the phrase. The phrase is then followed by a Hardware Bus `.` to trigger the execution (THEN).
+
+*[ THE INVERT GATE (NOT) ]* \
+To negate an object or an action, place the `[x.]` (Friction Gate) modifier immediately before the target word.
+\
+\
+\
+*Example 1: Affirmative Condition* \
+> "If drone; I kill power." \
+- `[c.] [q' r i] . [m.k' a s] [ng i]` \
+- (Gate: Drone . I kill Power) \
+
+*Example 2: Negative Condition* \
+> "If no drone; no I kill power." \
+- `[c.] [x.] [q' r i] . [x.] [m.k' a s] [ng i]` \
+- (Gate: Null Drone . Null I kill power)
+
+== 7. Vector Offsets (Spatial Pointers)
+
+Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs to specify a physical location, they place a Directional Dot immediately before the target object, treating the target as a base memory address and the dot as the spatial offset.
+
+*[ THE OFFSETS ]* \
+- `[f.]` (Vent): Inside / Into
+- `[h.]` (Exhaust): Outside / Out of
+- `[s.]` (Static): Above / Over
+- `[ng.]` (Drone): Below / Under
+- `[t'.]` (Switch): At / Pinned to
+
+*Example 1: Internal Location*
+> "I hide in the sanctuary."
+- `[m.q' u] [f.] [q' a]` 
+- (I lock . [Vector In] Sanctuary)
+
+*Example 2: Grounded Location*
+> "The coolant is under the drone."
+- `[f u x] [ng.] [q' r i]`
+- (Coolant . [Vector Low] Drone)

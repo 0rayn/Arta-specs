@@ -36,12 +36,42 @@ This appendix serves as the master register for field-scraping and terminal-emul
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[m]* + DP \ #arta("M") ],
-  [ *[n]* + DP \ #arta("N") ],
-  [ *[k]* + DP \ #arta("K") ]
+  [ *[m]* + DP \ #arta("m.") ],
+  [ *[n]* + DP \ #arta("n.") ],
+  [ *[k]* + DP \ #arta("k.") ]
 )
 
-== 4. Hexadecimal Numbers (0x0 - 0xF)
+#v(200pt)
+
+== 4. Timeline Flags (Execution Queue)
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 1.5em,
+  [ *[i.]* (Queued) \ #arta("i.") ],
+  [ *[ə.]* (Active) \ #arta("a.") ],
+  [ *[u.]* (Logged) \ #arta("u.") ]
+)
+
+== 5. Logic Gates (Branching and Negation)
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1.5em,
+  [ *[c.]* (IF) \ #arta("c.") ],
+  [ *[x.]* (NOT) \ #arta("x.") ]
+)
+
+== 5. Vector Offsets
+#grid(
+  columns: (1fr, 1fr, 1fr),
+  gutter: 1.5em,
+  [ *[f.]* (IN) \ #arta("f.") ],
+  [ *[h.]* (OUT) \ #arta("h.") ],
+  [ *[s.]* (Above) \ #arta("s.") ],
+  [ *[ng.]* (Below) \ #arta("ng.") ],
+  [ *[t']* (at) \ #arta("t'.") ]
+)
+
+== 6. Hexadecimal Numbers (0x0 - 0xF)
 
 Numbers follow standard 7-segment numeric mapping to ensure compatibility with Old World hardware displays.
 #grid(

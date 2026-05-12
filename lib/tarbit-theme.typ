@@ -163,9 +163,9 @@
   "k":  (ipa: "k",  segments: (f:true, g:true, e:true)),      // Left bracket
   
   // --- Subject Registers dotted variant ---
-  "M":  (ipa: "m.",  segments: (e:true, d:true, c:true, dp:true)),      // Low bucket
-  "N":  (ipa: "n.",  segments: (f:true, a:true, b:true, dp:true)),      // High arch
-  "K":  (ipa: "k.",  segments: (f:true, g:true, e:true, dp:true)),      // Left bracket
+  "m.":  (ipa: "m.",  segments: (e:true, d:true, c:true, dp:true)),      // Low bucket
+  "n.":  (ipa: "n.",  segments: (f:true, a:true, b:true, dp:true)),      // High arch
+  "k.":  (ipa: "k.",  segments: (f:true, g:true, e:true, dp:true)),      // Left bracket
  
 
   // --- Opcodes: The Relays & Switches (Ejectives/Clicks) ---
@@ -210,6 +210,21 @@
   "D":  (ipa: "D",  segments: (b:true, c:true, d:true, e:true, g:true)),
   "E":  (ipa: "E",  segments: (a:true, f:true, e:true, d:true, g:true)),
   "F":  (ipa: "F",  segments: (a:true, f:true, e:true, g:true)),
+
+  // --- Timeline Flags (Execution Queue) ---
+  "i.":  (ipa: "i.",  segments: (a:true, dp:true)), // Queued / Future
+  "a.":  (ipa: "ə.",  segments: (g:true, dp:true)), // Executing / Present
+  "u.":  (ipa: "u.",  segments: (d:true, dp:true)), // Logged / Past
+  // --- Logic Gates ---
+  "c.":  (ipa: "ǀ.",  segments: (g:true, e:true, d:true, dp:true)),         // IF
+  "x.":  (ipa: "x.",  segments: (e:true, g:true, b:true, dp:true)),         // NOT
+  // --- Vector Offsets ---
+  "f.":  (ipa: "f.",  segments: (f:true, g:true, e:true, d:true, dp:true)), // IN
+  "h.":  (ipa: "h.",  segments: (f:true, g:true, e:true, d:true, dp:true)), // OUT
+  "s.":  (ipa: "s.",  segments: (a:true, f:true, g:true, c:true, d:true, dp:true)), // above
+  "ng.": (ipa: "ŋ.",  segments: (f:true, a:true, b:true, c:true, e:true, dp:true)), // below
+  "t'.": (ipa: "tʼ.", segments: (b:true, c:true, f:true, e:true, dp:true)), // at/on
+
 )
 
 #let arta(input-string) = {
