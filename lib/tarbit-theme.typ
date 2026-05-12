@@ -151,7 +151,112 @@
     #if e [ #place(dx: 0.1em, dy: 0.9em)[#line(end: (0em, 0.6em), stroke: th + cl)] ] 
     
     // Syntax Modifier
-    #if dp [ #place(dx: 1.1em, dy: 1.5em)[#circle(radius: 1.5pt, fill: cl)] ] 
+    #if dp [ #place(dx: 0.9em, dy: 1.5em)[#circle(radius: 1.5pt, fill: cl)] ] 
+  ]
+}
+
+// making my life easier
+#let arta-data = (
+  // --- Subject Registers ---
+  "m":  (ipa: "m",  segments: (e:true, d:true, c:true)),      // Low bucket
+  "n":  (ipa: "n",  segments: (f:true, a:true, b:true)),      // High arch
+  "k":  (ipa: "k",  segments: (f:true, g:true, e:true)),      // Left bracket
+  
+  // --- Subject Registers dotted variant ---
+  "M":  (ipa: "m.",  segments: (e:true, d:true, c:true, dp:true)),      // Low bucket
+  "N":  (ipa: "n.",  segments: (f:true, a:true, b:true, dp:true)),      // High arch
+  "K":  (ipa: "k.",  segments: (f:true, g:true, e:true, dp:true)),      // Left bracket
+ 
+
+  // --- Opcodes: The Relays & Switches (Ejectives/Clicks) ---
+  "t'": (ipa: "tʼ", segments: (b:true, c:true, f:true, e:true)), // Sharp Switch
+  "k'": (ipa: "kʼ", segments: (f:true, g:true, e:true)),         // Cracking Relay
+  "q'": (ipa: "qʼ", segments: (b:true, c:true, g:true)),         // Heavy Breaker
+  "c":  (ipa: "ǀ",  segments: (g:true, e:true, d:true)),         // Magnetic Relay (Click)
+  
+  // --- Opcodes: Static & Friction (Fricatives) ---
+  "s":  (ipa: "s",  segments: (a:true, f:true, g:true, c:true, d:true)), // High Static
+  "sh": (ipa: "ʃ",  segments: (a:true, g:true, d:true)),         // Mid Static
+  "x":  (ipa: "x",  segments: (e:true, g:true, b:true)),         // Friction Scrape
+  "f":  (ipa: "f",  segments: (f:true, g:true, e:true, d:true)), // Pressure Vent
+  "h":  (ipa: "h",  segments: (f:true, g:true, e:true, d:true)), // Shared Exhaust
+  "gh": (ipa: "ʁ",  segments: (f:true, a:true, b:true, g:true)), // Platter Spin
+  
+  // --- Opcodes: Failing Motors (Trills/Hums) ---
+  "r":  (ipa: "r",  segments: (e:true, g:true, c:true)),         // Motor Trill
+  "ng": (ipa: "ŋ",  segments: (f:true, a:true, b:true, c:true, e:true)), // Electronic Drone
+  
+  // --- Power States (Vowels) ---
+  "i":  (ipa: "i",  segments: (a:true)),                         // High State
+  "a":  (ipa: "ə",  segments: (g:true)),                         // Neutral State
+  "u":  (ipa: "u",  segments: (d:true)),                         // Low State
+  
+  // --- Hardware Bus ---
+  ".":  (ipa: " ",  segments: (dp:true)),                        // The Delimiter
+  // --- Hexadecimal Numbers (0x0 - 0xF) ---
+  "0":  (ipa: "0",  segments: (a:true, b:true, c:true, d:true, e:true, f:true)),
+  "1":  (ipa: "1",  segments: (b:true, c:true)),
+  "2":  (ipa: "2",  segments: (a:true, b:true, g:true, e:true, d:true)),
+  "3":  (ipa: "3",  segments: (a:true, b:true, g:true, c:true, d:true)),
+  "4":  (ipa: "4",  segments: (f:true, g:true, b:true, c:true)),
+  "5":  (ipa: "5",  segments: (a:true, f:true, g:true, c:true, d:true)),
+  "6":  (ipa: "6",  segments: (a:true, f:true, e:true, d:true, c:true, g:true)),
+  "7":  (ipa: "7",  segments: (a:true, b:true, c:true)),
+  "8":  (ipa: "8",  segments: (a:true, b:true, c:true, d:true, e:true, f:true, g:true)),
+  "9":  (ipa: "9",  segments: (g:true, f:true, a:true, b:true, c:true)),
+  "A":  (ipa: "A",  segments: (e:true, f:true, a:true, b:true, c:true, g:true)),
+  "B":  (ipa: "B",  segments: (f:true, e:true, d:true, c:true, g:true)),
+  "C":  (ipa: "C",  segments: (a:true, f:true, e:true, d:true)),
+  "D":  (ipa: "D",  segments: (b:true, c:true, d:true, e:true, g:true)),
+  "E":  (ipa: "E",  segments: (a:true, f:true, e:true, d:true, g:true)),
+  "F":  (ipa: "F",  segments: (a:true, f:true, e:true, g:true)),
+)
+
+#let arta(input-string) = {
+  let parts = input-string.split(" ")
+  for p in parts {
+    if p in arta-data {
+      glyph(..arta-data.at(p).segments)
+    } else {
+      // Hardware Error: Render a blank box or a '?' to indicate a bad opcode
+      rect(width: 1.2em, height: 1.8em, stroke: 0.5pt + red)
+    }
+  }
+}
+
+#let lexicon-entry(input-string, definition) = {
+  let parts = input-string.split(" ")
+  let ipa-out = ""
+  
+  for p in parts {
+    if p in arta-data {
+      ipa-out += arta-data.at(p).ipa
+      if p == "." { ipa-out += " " } 
+    }
+  }
+
+  box(width: 100%, inset: (y: 1.2em), stroke: (bottom: 0.5pt + luma(220)))[
+    #stack(dir: ttb, spacing: 1em)[
+      // TOP ROW: Identification Header (Near-letters and IPA)
+      #stack(dir: ltr, spacing: 1.5em)[
+        #text(size: 11pt, weight: "bold", font: "monospace")[#input-string]
+        #text(size: 9pt, fill: gray, style: "italic")[#ipa-out]
+      ]
+      
+      // BOTTOM ROW: Hardware Scrape + Definition
+      #grid(
+        columns: (120pt, 1fr),
+        gutter: 2em,
+        // Aligns both the glyphs and the text to the absolute top of the row
+        align: (left + top, left + top),
+        
+        // Left Column: The Arta Scrape
+        scale(x: 100%, origin: left + top)[#arta(input-string)],
+        
+        // Right Column: The Semantic Definition
+        text(size: 10pt)[#definition]
+      )
+    ]
   ]
 }
 

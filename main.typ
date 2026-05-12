@@ -16,6 +16,6 @@
 #pagebreak()
 #include "src/04-script.typ"
 #pagebreak()
-#include "src/05-lexicon.typ"
+#include "src/05-character-map.typ"
 #pagebreak()
-#include "src/06-character-map.typ"
+#include "src/06-lexicon.typ"
