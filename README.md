@@ -27,10 +27,11 @@ The documentation is written in [Typst](https://typst.app/), a lightning-fast ma
 ```text
 ├── main.typ               # The primary compiler file and global layout settings
 ├── src/
-│   ├── 00-prologue.typ    # Narrative scene / Context initialization
-│   ├── 01-lore.typ        # The history of the Great Log-Off and the Martas
-│   ├── 02-phonetics.typ   # Hardware consonant classes and the "Dead Pitch" rule
-│   ├── 03-syntax.typ      # V-O-O grammar rules and the Hex-Hand counting system
-│   ├── 04-script.typ      # The 7-Segment visual orthography (with custom Typst rendering)
-│   └── 05-lexicon.typ     # The official dictionary (Opcodes, Registers, and Flags)
+│   ├── 00-prologue.typ           # Narrative scene / Context initialization
+│   ├── 01-lore.typ               # The history of the Great Log-Off and the Martas
+│   ├── 02-phonetics.typ          # Hardware consonant classes and the "Dead Pitch" rule
+│   ├── 03-syntax.typ             # V-O-O grammar rules and the Hex-Hand counting system
+│   ├── 04-script.typ             # The 7-Segment visual orthography (with custom Typst rendering)
+│   ├── 05-character-map.typ      # detailed character map for all symbols of ARTA
+│   └── 06-lexicon.typ            # The official dictionary (Opcodes, Registers, and Flags)
 └── README.md
