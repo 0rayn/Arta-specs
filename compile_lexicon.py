@@ -11,11 +11,12 @@ ARTA_ALPHABET = [
     "s", "sh", "x", "f", "h", "gh", # Opcodes: Static & Vents
     "r", "ng",                   # Opcodes: Motors
     "i", "a", "u",               # Registers / Power States
-    "m.", "n.", "k.",            # Subject Prefixes (Dotted)
-    "c.", "x.",                  # Logic Gates (Dotted)
+    "m.", "n.", "k.", "sh.",     # Subject Prefixes (Dotted)
+    "c.", "x.", "k'.", "r.", "q'.", # Logic Gates & Queries (Dotted)
     "t'.", "s.", "f.", "h.", "ng.", # Vector Offsets (Dotted)
     "i.", "a.", "u.",            # Timeline Flags (Dotted)
-    "."                          # The Bus
+    "+", "-", "*", "/", "=",     # ALU Operators
+    "."                          # then
 ]
 
 # Hardware descriptions for the dictionary headers
@@ -29,6 +30,10 @@ SECTOR_METADATA = {
     "h": "Shared Exhaust", "gh": "Platter Spin",
     "r": "Motor Trill", "ng": "Electronic Drone",
     "i": "High Power State", "a": "Neutral Power State", "u": "Low Power State",
+    "sh.": "Subject Register (External/It)",
+    "q'.": "Logic Gate (Polling/Query)",
+    "k'.": "Logic Gate (Boolean AND)",
+    "r.": "Logic Gate (Boolean OR)",
     "i.": "Execution Queue (Future)", "a.": "Execution Active (Present)", "u.": "Execution Logged (Past)"
 }
 

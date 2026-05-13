@@ -13,7 +13,8 @@ This appendix serves as the master register for field-scraping and terminal-emul
   [ *[qʼ]* \ #arta("q'")],
   
   [ *[ǀ]* \ #arta("c")],
-  [ *[s] / [ʃ]* \ #arta("sh")],
+  [ *[S]* \ #arta("s")],
+  [ *[ʃ]* \ #arta("sh")],
   [ *[x]* \ #arta("x")],
 
   [ *[f] / [h]* \ #arta("h")],
@@ -70,6 +71,21 @@ This appendix serves as the master register for field-scraping and terminal-emul
   [ *[ng.]* (Below) \ #arta("ng.") ],
   [ *[t']* (at) \ #arta("t'.") ]
 )
+
+== 5. The ALU Registers (Math Operators)
+
+Used for base-16 calculation, memory address incrementing, and variable assignment. 
+
+#grid(
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr),
+  gutter: 1.5em,
+  [ *+* (Add) \ #arta("+") ],
+  [ *-* (Sub) \ #arta("-") ],
+  [ **\* (Mult) \ #arta("*") ],
+  [ *\/* (Div) \ #arta("/") ],
+  [ *=* (Assign) \ #arta("=") ]
+)
+
 
 == 6. Hexadecimal Numbers (0x0 - 0xF)
 

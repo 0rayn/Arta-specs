@@ -32,5 +32,10 @@
     "h.": "modifier: [VECTOR OUT] The Exhaust dot. Indicates movement out of or location external to a structure.",
     "s.": "modifier: [VECTOR HIGH] The Static dot. Indicates location above, on top of, or at a higher physical elevation.",
     "ng.": "modifier: [VECTOR LOW] The Drone dot. Indicates location below, underneath, or grounded beneath an object.",
-    "t'.": "modifier: [VECTOR PIN] The Switch dot. Indicates an exact, physical connection or adjacent location (at/on)."
+    "t'.": "modifier: [VECTOR PIN] The Switch dot. Indicates an exact, physical connection or adjacent location (at/on).",
+    "sh.": "prefix: [EXTERNAL POINTER] Binds the opcode execution to a third-party or unidentified entity (He/She/It/They).",
+    "q'.": "modifier: [QUERY FLAG] The Breaker dot. Casts the following phrase as a polling request for data (Question).",
+    "k'.": "modifier: [AND GATE] The Cracking Relay dot. Binds two conditions, registers, or opcodes together (Boolean AND).",
+    "r.": "modifier: [OR GATE] The Motor Trill dot. Offers a diverging branch between two choices (Boolean OR).",
+    ".": "modifier: [EXECUTION TRIGGER] The Hardware Bus. Acts as a 'THEN' gate, bridging a logical condition to its resulting execution."
 }

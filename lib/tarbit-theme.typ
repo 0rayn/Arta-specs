@@ -163,9 +163,10 @@
   "k":  (ipa: "k",  segments: (f:true, g:true, e:true)),      // Left bracket
   
   // --- Subject Registers dotted variant ---
-  "m.":  (ipa: "m.",  segments: (e:true, d:true, c:true, dp:true)),      // Low bucket
-  "n.":  (ipa: "n.",  segments: (f:true, a:true, b:true, dp:true)),      // High arch
-  "k.":  (ipa: "k.",  segments: (f:true, g:true, e:true, dp:true)),      // Left bracket
+  "m.":  (ipa: "m.",  segments: (e:true, d:true, c:true, dp:true)),
+  "n.":  (ipa: "n.",  segments: (f:true, a:true, b:true, dp:true)),
+  "k.":  (ipa: "k.",  segments: (f:true, g:true, e:true, dp:true)),
+  "sh.": (ipa: "ʃ.",  segments: (a:true, g:true, d:true, dp:true)),
  
 
   // --- Opcodes: The Relays & Switches (Ejectives/Clicks) ---
@@ -175,12 +176,12 @@
   "c":  (ipa: "ǀ",  segments: (g:true, e:true, d:true)),         // Magnetic Relay (Click)
   
   // --- Opcodes: Static & Friction (Fricatives) ---
-  "s":  (ipa: "s",  segments: (a:true, f:true, g:true, c:true, d:true)), // High Static
-  "sh": (ipa: "ʃ",  segments: (a:true, g:true, d:true)),         // Mid Static
-  "x":  (ipa: "x",  segments: (e:true, g:true, b:true)),         // Friction Scrape
-  "f":  (ipa: "f",  segments: (f:true, g:true, e:true, d:true)), // Pressure Vent
-  "h":  (ipa: "h",  segments: (f:true, g:true, e:true, d:true)), // Shared Exhaust
-  "gh": (ipa: "ʁ",  segments: (f:true, a:true, b:true, g:true)), // Platter Spin
+  "s":  (ipa: "s",  segments: (a:true, g:true, d:true)),          // High Static
+  "sh": (ipa: "ʃ",  segments: (a:true, g:true, d:true, f:true)),  // Mid Static
+  "x":  (ipa: "x",  segments: (e:true, g:true, b:true)),          // Friction Scrape
+  "f":  (ipa: "f",  segments: (f:true, g:true, e:true, d:true)),  // Pressure Vent
+  "h":  (ipa: "h",  segments: (f:true, g:true, e:true, d:true)),  // Shared Exhaust
+  "gh": (ipa: "ʁ",  segments: (f:true, a:true, b:true, g:true)),  // Platter Spin
   
   // --- Opcodes: Failing Motors (Trills/Hums) ---
   "r":  (ipa: "r",  segments: (e:true, g:true, c:true)),         // Motor Trill
@@ -190,9 +191,7 @@
   "i":  (ipa: "i",  segments: (a:true)),                         // High State
   "a":  (ipa: "ə",  segments: (g:true)),                         // Neutral State
   "u":  (ipa: "u",  segments: (d:true)),                         // Low State
-  
-  // --- Hardware Bus ---
-  ".":  (ipa: " ",  segments: (dp:true)),                        // The Delimiter
+
   // --- Hexadecimal Numbers (0x0 - 0xF) ---
   "0":  (ipa: "0",  segments: (a:true, b:true, c:true, d:true, e:true, f:true)),
   "1":  (ipa: "1",  segments: (b:true, c:true)),
@@ -218,6 +217,10 @@
   // --- Logic Gates ---
   "c.":  (ipa: "ǀ.",  segments: (g:true, e:true, d:true, dp:true)),         // IF
   "x.":  (ipa: "x.",  segments: (e:true, g:true, b:true, dp:true)),         // NOT
+  "r.":  (ipa: "r.",  segments: (e:true, g:true, c:true, dp:true)),         // or
+
+  // --- pull ---
+  "q'.": (ipa: "qʼ.", segments: (b:true, c:true, g:true, dp:true)),         // Heavy Breaker
   // --- Vector Offsets ---
   "f.":  (ipa: "f.",  segments: (f:true, g:true, e:true, d:true, dp:true)), // IN
   "h.":  (ipa: "h.",  segments: (f:true, g:true, e:true, d:true, dp:true)), // OUT
@@ -225,15 +228,30 @@
   "ng.": (ipa: "ŋ.",  segments: (f:true, a:true, b:true, c:true, e:true, dp:true)), // below
   "t'.": (ipa: "tʼ.", segments: (b:true, c:true, f:true, e:true, dp:true)), // at/on
 
+  // --- Arithmetic Logic Unit (ALU) Operators ---
+  "+":  (ipa: "+",  segments: (f:true, g:true)),            // Add / Increment
+  "-":  (ipa: "-",  segments: (e:true, g:true)),            // Subtract / Decrement
+  "*":  (ipa: "*",  segments: (f:true, g:true, dp:true)),   // Multiply / Expand
+  "/":  (ipa: "/",  segments: (e:true, g:true, dp:true)),   // Divide / Split
+  "=":  (ipa: "=",  segments: (d:true, g:true)),            // Assign / Equals
+
+// --- Execution Trigger ---
+  ".":  (ipa: " ",  segments: (dp:true)), // The THEN Gate / Execution Bus
 )
 
 #let arta(input-string) = {
+  // Split by single spaces. Double spaces will create empty strings ("") in the array.
   let parts = input-string.split(" ")
+  
   for p in parts {
-    if p in arta-data {
+    if p == "" {
+      // EMPTY METAL: Render a physical gap between words
+      h(0.8em) 
+    } else if p in arta-data {
+      // VALID HARDWARE: Render the 7-segment scrape
       glyph(..arta-data.at(p).segments)
     } else {
-      // Hardware Error: Render a blank box or a '?' to indicate a bad opcode
+      // HARDWARE ERROR: Render a red box for bad opcodes
       rect(width: 1.2em, height: 1.8em, stroke: 0.5pt + red)
     }
   }

@@ -123,6 +123,11 @@
 #lexicon-entry("k.", "prefix: [SECOND PERSON] Binds the opcode execution to the target entity (You).")
 
 // ========================================
+== SECTOR [ sh. ] // SUBJECT REGISTER (EXTERNAL/IT)
+
+#lexicon-entry("sh.", "prefix: [EXTERNAL POINTER] Binds the opcode execution to a third-party or unidentified entity (He/She/It/They).")
+
+// ========================================
 == SECTOR [ c. ] // LOGIC GATE (COMPARE/IF)
 
 #lexicon-entry("c.", "modifier: [GATE] The Relay dot. Evaluates the following phrase as a condition (IF).")
@@ -131,6 +136,11 @@
 == SECTOR [ x. ] // LOGIC GATE (NOT/INVERT)
 
 #lexicon-entry("x.", "modifier: [NOT] The Friction dot. Inverts or nullifies the following opcode or register (NO/FALSE).")
+
+// ========================================
+== SECTOR [ q'. ] // LOGIC GATE (POLLING/QUERY)
+
+#lexicon-entry("q'.", "modifier: [QUERY FLAG] The Breaker dot. Casts the following phrase as a polling request for data (Question).")
 
 // ========================================
 == SECTOR [ t'. ] // VECTOR OFFSET (AT/PIN)

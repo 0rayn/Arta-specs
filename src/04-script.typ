@@ -8,12 +8,12 @@ In the Wastes, there is no paper and there is no ink. Tarbits write with screwdr
 
 The alphabet is directly repurposed from the most common piece of intact Old World e-waste: the 7-segment digital LED display. Every character in Arta is formed by carving a specific combination of these 7 straight lines.
 
-== 2. The Syntax Delimiters (The Decimal Point)
+== 2. Whitespace and The Execution Trigger (DP)
+In the Wastes, carving takes energy. Therefore, standard spaces between words are simply left as empty, uncarved metal. The compiler ignores them.
+However, the standalone Decimal Point (DP) serves a highly specific, active hardware function:
 
-In Arta's machine syntax, the Decimal Point (DP) serves two distinct hardware functions depending on its placement:
-
-1. *The Subject Prefix:* When the DP is carved within the same box as a Subject Glyph (`[m]`, `[n]`, `[k]`), it acts as a *ligature*. It binds the subject directly to the following verb, indicating who is executing the opcode.
-2. *The Hardware Space:* When the DP sits alone in its own character box, it acts as a *null-separator*. It provides a visual and logical "clock tick" that separates the verb from its objects or objects from each other.
+1. *The Subject Prefix:* When carved within the same box as a Subject Glyph (`[m]`, `[n]`, `[k]`), it binds the subject to the verb.
+2. *The Execution Trigger (THEN):* When the DP sits alone in its own character box `.`, it is not a space. It is the *Hardware Bus*. It acts as a logical `THEN` gate, signaling the end of a conditional statement (`[c.]`) and triggering the execution of the following command.
 
 *[ THE PREFIX GLYPHS ]*
 - *[m] (I/Me):* #glyph(e: true, d: true, c: true) (Low bucket shape) 

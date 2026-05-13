@@ -1,3 +1,5 @@
+#import "../lib/tarbit-theme.typ": arta
+
 = The Machine Grammar
 
 Arta was not born from poetry; it was compiled from necessity. Its grammar mirrors the rigid logic of the systems the Tarbits scavenge. There are no irregular verbs, no silent letters, and no exceptions to the rules. If the syntax does not compile, the meaning is lost.
@@ -17,11 +19,6 @@ Old World languages were bloated with historical baggage and unpronounced letter
 *[ NO SILENT LETTERS ]* \
 What is written is exactly what is executed by the mouth. If a letter exists in a word, it carries acoustic data and must be pronounced.
 
-*[ THE ABSOLUTE PLURAL ]* \
-To allocate multiple instances of an object, you append the static fricative `-[s]` to the root. There are zero exceptions. Whether the root ends in a click, a hum, or a power state, adding `-[s]` always creates a plural.
-
-- `[tʼ ə r]` (Builder) -> `[tʼ ə r s]` (Builders)
-- `[ŋ i]` (Power) -> `[ŋ i s]` (Powers)
 
 == 3. Base-16 Mathematics (The Hex-Hand)
 Humans traditionally count in Base-10 because they have ten fingers. The Tarbits live inside the metal, and the metal counts in Hexadecimal. To interact seamlessly with raw memory addresses, MAC addresses, and low-level hardware, Arta's counting system is strictly Base-16. To count to 16 on a single hand, Tarbits do not raise fingers ; they use their hand as a physical memory grid.
@@ -54,6 +51,7 @@ A Arta sentence operates like an Assembly Language instruction (`MOV DEST, SRC`)
 - `[m.]` = I / Me (First Person)
 - `[n.]` = We (First Person Plural)
 - `[k.]` = You / Target (Second Person)
+- `[sh.]` = He / She / It / They (External Pointer)
 
 *[ SENTENCE ASSEMBLY ]* \
 To build a sentence, you attach the prefix to the root verb, followed by the target objects.
@@ -90,22 +88,40 @@ A Tarbit cannot rely purely on linear execution; survival requires conditional l
 
 *[ THE COMPARE GATE (IF) ]* \
 To create a condition, append the `[c.]` (Relay Gate) modifier to the front of the phrase. The phrase is then followed by a Hardware Bus `.` to trigger the execution (THEN).
-
+\
+\
 *[ THE INVERT GATE (NOT) ]* \
 To negate an object or an action, place the `[x.]` (Friction Gate) modifier immediately before the target word.
 \
 \
-\
-*Example 1: Affirmative Condition* \
-> "If drone; I kill power." \
-- `[c.] [q' r i] . [m.k' a s] [ng i]` \
-- (Gate: Drone . I kill Power) \
+
+*Example 1: Affirmative Condition*
+> "If drone here then kill power."
+- `[c.] [q' r i] . [m.k' a s] [ng i]`
+- (If: Drone [THEN] I-kill Power)
 
 *Example 2: Negative Condition* \
 > "If no drone; no I kill power." \
 - `[c.] [x.] [q' r i] . [x.] [m.k' a s] [ng i]` \
-- (Gate: Null Drone . Null I kill power)
+  #arta("c.  q' r i  r.  c i t'  .  k' a s  ng i") \
+- (Gate: Null Drone [THEN] Null I kill power)
+\
+*[ THE BOOLEAN GATES (AND / OR) ]* \
+To chain multiple objects or conditions together, Tarbits use the Boolean Dots. They sit strictly between the two elements they are modifying.
 
+- `[k'.]` (The AND Gate): Binds two elements. Both must be true/present.
+- `[r.]` (The OR Gate): Branches two elements. Either can be true/present.
+
+*Example 1: Boolean AND*
+> "I scavenge the drone and the sensor."
+- `[m.k' a x] [q' r i] [k'.] [c i t']`
+- (I scavenge . Drone [AND] Sensor)
+
+*Example 2: Complex Logic Branching*
+> "If drone OR sensor here; kill power."
+- `[c.] [q' r i] [r.] [c i t'] . [k' a s] [ng i]`
+- (Gate: Drone [OR] Sensor . kill power)
+\
 == 7. Vector Offsets (Spatial Pointers)
 
 Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs to specify a physical location, they place a Directional Dot immediately before the target object, treating the target as a base memory address and the dot as the spatial offset.
@@ -126,3 +142,41 @@ Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs t
 > "The coolant is under the drone."
 - `[f u x] [ng.] [q' r i]`
 - (Coolant . [Vector Low] Drone)
+
+== 8. Data Polling (Questions)
+
+A Tarbit does not use question words like "Who, What, Where, or Why." They execute a Data Poll. By placing the `[q'.]` (Query Flag) at the beginning of a phrase, the sentence becomes a `GET` request waiting for a return variable.
+
+*[ POLLED EXECUTION ]*
+> "Did the drone kill the power?"
+- `[q'.] [u.] [sh.k' a s] [ng i]`
+- (Query . Past . It kills Power?)
+
+*[ SPATIAL POLLING (WHERE) ]*
+To ask "Where," a Tarbit simply polls a Vector Offset. 
+> "Where is the sanctuary?"
+- `[q'.] [f.] [q' a]`
+- (Query . Inside . Sanctuary?)
+
+== 9. Operator Overloading (The ALU Modifiers)
+
+The Arithmetic Logic Unit (ALU) symbols do more than just math. When placed before a word, they act as parameter modifiers. Their exact physical translation depends entirely on the data type (Noun vs. Verb) they are modifying.
+
+*[ THE DECREMENT (`-`) ]*
+- *Applied to an Opcode (Throttle):* Executes the action slowly, quietly, or with low power.
+  - `- [m.k' a x]` (I slowly scavenge)
+- *Applied to a Register (Scale Down):* Modifies the object to be small, light, or minor.
+  - `- [s i r]` (A small wire)
+
+*[ THE INCREMENT (`+`) ]*
+- *Applied to an Opcode (Overclock):* Executes the action rapidly, aggressively, or with high power.
+  - `+ [m.f i r]` (I run fast)
+- *Applied to a Register (Scale Up):* Modifies the object to be large, heavy, or major.
+  - `+ [q' r i]` (A massive drone / A heavy drone)
+
+*[ THE MULTIPLIER (`*`) ]*
+- *Applied to an Opcode (Loop):* Executes the action repeatedly or continuously.
+  - `* [m.h i sh]` (I repeatedly broadcast)
+- *Applied to a Register (The Absolute Plural):* Allocates an array of multiple instances. This serves as the universal plural marker. 
+  - `* [t' a r]` (Builders)
+  - `* [q' r i]` (A drone swarm / Many drones)
