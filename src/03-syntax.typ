@@ -19,9 +19,8 @@ Old World languages were bloated with historical baggage and unpronounced letter
 *[ NO SILENT LETTERS ]* \
 What is written is exactly what is executed by the mouth. If a letter exists in a word, it carries acoustic data and must be pronounced.
 
-
 == 3. Base-16 Mathematics (The Hex-Hand)
-Humans traditionally count in Base-10 because they have ten fingers. The Tarbits live inside the metal, and the metal counts in Hexadecimal. To interact seamlessly with raw memory addresses, MAC addresses, and low-level hardware, Arta's counting system is strictly Base-16. To count to 16 on a single hand, Tarbits do not raise fingers ; they use their hand as a physical memory grid.
+Humans traditionally count in Base-10 because they have ten fingers. The Tarbits live inside the metal, and the metal counts in Hexadecimal. To interact seamlessly with raw memory addresses, MAC addresses, and low-level hardware, Arta's counting system is strictly Base-16. To count to 16 on a single hand, Tarbits do not raise fingers; they use their hand as a physical memory grid.
 
 *[ THE BIOLOGICAL HEX-GRID ]* \
 The thumb acts as the *Cursor*. The remaining four fingers act as data columns (C0–C3). Each finger contains exactly four distinct touch-points: the Base (palm knuckle), the Lower Joint, the Upper Joint, and the Tip. By sliding the thumb across these points from right-to-left (Pinky to Index), a Tarbit maps exactly 16 values (0x0 to 0xF) on a single palm:
@@ -44,23 +43,37 @@ This tactile system allows a scavenger to physically "hold" a hexadecimal memory
 )
 #v(1em)
 
-== 4. Assembly Syntax (V-O-O)
-A Arta sentence operates like an Assembly Language instruction (`MOV DEST, SRC`). The syntax strictly follows a Verb-Object-Object structure. The Subject (the one executing the command) is not a separate word ; it is a one-letter prefix attached directly to the verb.
+== 4. Stateful Execution and Context Switching
 
-*[ THE SUBJECT PREFIXES ]* \
-- `[m.]` = I / Me (First Person)
-- `[n.]` = We (First Person Plural)
-- `[k.]` = You / Target (Second Person)
-- `[sh.]` = He / She / It / They (External Pointer)
+Arta operates as a stateful machine. To save bandwidth and carving time, sentences do not require a subject attached to every action. Instead, the language relies on *Context Switching*. 
+
+The syntax of an executable command is strictly **Opcode-Register-Register**. The entity performing the action is determined by the currently active *Thread Context*.
+
+*[ THREAD CONTEXTS (THE POINTERS) ]* \
+A Tarbit declares an active thread using a standalone memory pointer. Once declared, every subsequent command is executed by that thread until a new context is declared.
+
+- `[m.]` = Context: Local Host (I / Me)
+- `[n.]` = Context: Local Cluster (We)
+- `[k.]` = Context: Target Client (You)
+- `[sh.]` = Context: External Node (It / They)
 
 *[ SENTENCE ASSEMBLY ]* \
-To build a sentence, you attach the prefix to the root verb, followed by the target objects.
+Pointers are *never* attached to opcodes. To build a command block, declare the Context Pointer, leave a physical gap, and then batch-execute your opcodes sequentially on the same line. 
 
-> `[PREFIX].[VERB] [OBJECT_1] [OBJECT_2]`
+> `[CONTEXT_POINTER]  [OPCODE] [REGISTER]` 
 
-*Example:* If `[tʼ ə r]` is "to build", and `[ŋ i]` is "power":
-- `[m.tʼ ə r] [ŋ i]` = "I build power."
-- `[k.kʼ ə s] [ŋ i]` = "You kill the power."
+If chaining multiple commands under the *same* context, simply list them with physical gaps. The active thread will execute them in sequence. 
+
+> `[CONTEXT_POINTER]  [OPCODE] [REGISTER]  [OPCODE] [REGISTER]`
+
+The Execution Bus (`.`) acts as a hard interrupt. It is only used to close a logical condition or to terminate the current thread block so a new Context Pointer can take over.
+
+> `[CONTEXT_1]  [OPCODE] [REGISTER]  .  [CONTEXT_2]  [OPCODE] [REGISTER]`
+
+*Example: Batch Execution & Context Switching*
+> "Local Host kills the drone and fetches the sensor. Target Client locks the door."
+- `[m.]  [k' a s] [q' r i]  [c i r] [c i t']  .  [k.]  [q' u t'] [t' i k']`
+- (Context Local Host: Kill Drone [Batch] Fetch Sensor . [INTERRUPT] Context Target Client: Lock Door)
 
 == 5. The Execution Queue (Timeline Flags)
 
@@ -75,12 +88,11 @@ To indicate when an action happens, a Tarbit prepends the entire instruction wit
 
 *[ TIMELINE ASSEMBLY ]*
 The timeline flag is spoken as a sharp, standalone whisper before the main command.
-
-> `[FLAG] [PREFIX].[VERB] [OBJECT]`
+> `[FLAG]  [CONTEXT_POINTER]  [OPCODE]  [REGISTER]`
 
 *Examples:*
-- `[i.] [m.tʼ ə r] [a r tʼ a]` = "Target Queue: I will build the Arta system."
-- `[u.] [k.kʼ ə s] [ŋ i]` = "Cached Log: You killed the power."
+- `[i.]  [m.]  [tʼ ə r]  [a r tʼ a]` = "Target Queue: Local Host will build the Arta system."
+- `[u.]  [k.]  [kʼ ə s]  [ŋ i]` = "Cached Log: Target Client killed the power."
 
 == 6. Logic Gates (Branching and Negation)
 
@@ -91,40 +103,40 @@ To create a condition, append the `[c.]` (Relay Gate) modifier to the front of t
 \
 \
 *[ THE INVERT GATE (NOT) ]* \
-To negate an object or an action, place the `[x.]` (Friction Gate) modifier immediately before the target word.
+To negate a register or an opcode, place the `[x.]` (Friction Gate) modifier immediately before the target.
 \
 \
-
 *Example 1: Affirmative Condition*
-> "If drone here then kill power."
-- `[c.] [q' r i] . [m.k' a s] [ng i]`
-- (If: Drone [THEN] I-kill Power)
+> "If drone here then Local Host kills power."
+- `[c.]  [q' r i]  .  [m.]  [k' a s]  [ng i]`
+- (If: Drone [THEN] Local Host kills Power)
 
 *Example 2: Negative Condition* \
-> "If no drone; no I kill power." \
-- `[c.] [x.] [q' r i] . [x.] [m.k' a s] [ng i]` \
-  #arta("c.  q' r i  r.  c i t'  .  k' a s  ng i") \
-- (Gate: Null Drone [THEN] Null I kill power)
+> "If no drone; no Local Host kills power."
+\
+- `[c.]  [x.]  [q' r i]  .  [x.]  [m.]  [k' a s]  [ng i]` \
+  #arta("c.  x.  q' r i  .  x.  m.  k' a s  ng i") \
+- (Gate: Null Drone [THEN] Null Local Host kills power)
 \
 *[ THE BOOLEAN GATES (AND / OR) ]* \
-To chain multiple objects or conditions together, Tarbits use the Boolean Dots. They sit strictly between the two elements they are modifying.
+To chain multiple registers or conditions together, Tarbits use the Boolean Dots. They sit strictly between the two elements they are modifying.
 
-- `[k'.]` (The AND Gate): Binds two elements. Both must be true/present.
+- `[gh.]` (The AND Gate): Binds two elements. Both must be true/present.
 - `[r.]` (The OR Gate): Branches two elements. Either can be true/present.
 
-*Example 1: Boolean AND*
-> "I scavenge the drone and the sensor."
-- `[m.k' a x] [q' r i] [k'.] [c i t']`
-- (I scavenge . Drone [AND] Sensor)
+*Example 3: Boolean AND*
+> "Local Host scavenges the drone and the sensor."
+- `[m.]  [k' a x]  [q' r i]  [gh.]  [c i t']`
+- (Local Host scavenges . Drone [AND] Sensor)
 
-*Example 2: Complex Logic Branching*
-> "If drone OR sensor here; kill power."
-- `[c.] [q' r i] [r.] [c i t'] . [k' a s] [ng i]`
-- (Gate: Drone [OR] Sensor . kill power)
+*Example 4: Complex Logic Branching*
+> "If drone OR sensor here; Local Host kills power."
+- `[c.]  [q' r i]  [r.]  [c i t']  .  [m.]  [k' a s]  [ng i]`
+- (Gate: Drone [OR] Sensor [THEN] Local Host kills power)
 \
 == 7. Vector Offsets (Spatial Pointers)
 
-Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs to specify a physical location, they place a Directional Dot immediately before the target object, treating the target as a base memory address and the dot as the spatial offset.
+Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs to specify a physical location, they place a Directional Dot immediately before the target register, treating the target as a base memory address and the dot as the spatial offset.
 
 *[ THE OFFSETS ]* \
 - `[f.]` (Vent): Inside / Into
@@ -134,13 +146,13 @@ Arta does not have prepositions; it uses *Vector Offsets*. When a Tarbit needs t
 - `[t'.]` (Switch): At / Pinned to
 
 *Example 1: Internal Location*
-> "I hide in the sanctuary."
-- `[m.q' u] [f.] [q' a]` 
-- (I lock . [Vector In] Sanctuary)
+> "Local Host hides in the sanctuary."
+- `[m.]  [q' u]  [f.]  [q' a]` 
+- (Local Host locks . [Vector In] Sanctuary)
 
 *Example 2: Grounded Location*
 > "The coolant is under the drone."
-- `[f u x] [ng.] [q' r i]`
+- `[f u x]  [ng.]  [q' r i]`
 - (Coolant . [Vector Low] Drone)
 
 == 8. Data Polling (Questions)
@@ -149,54 +161,54 @@ A Tarbit does not use question words like "Who, What, Where, or Why." They execu
 
 *[ POLLED EXECUTION ]*
 > "Did the drone kill the power?"
-- `[q'.] [u.] [sh.k' a s] [ng i]`
-- (Query . Past . It kills Power?)
+- `[q'.]  [u.]  [sh.]  [k' a s]  [ng i]`
+- (Query . Past . External Node kills Power?)
 
 *[ SPATIAL POLLING (WHERE) ]*
-To ask "Where," a Tarbit simply polls a Vector Offset. 
+To ask "Where," a Tarbit simply polls a Vector Offset.
 > "Where is the sanctuary?"
-- `[q'.] [f.] [q' a]`
+- `[q'.]  [f.]  [q' a]`
 - (Query . Inside . Sanctuary?)
 
 == 9. Operator Overloading (The ALU Modifiers)
 
-The Arithmetic Logic Unit (ALU) symbols do more than just math. When placed before a word, they act as parameter modifiers. Their exact physical translation depends entirely on the data type (Noun vs. Verb) they are modifying.
+The Arithmetic Logic Unit (ALU) symbols do more than just math. When placed before a word, they act as parameter modifiers. Their exact physical translation depends entirely on the data type (Register vs. Opcode) they are modifying.
 
 *[ THE DECREMENT (`-`) ]*
 - *Applied to an Opcode (Throttle):* Executes the action slowly, quietly, or with low power.
-  - `- [m.k' a x]` (I slowly scavenge)
+- `- [m.]  [k' a x]` (Local Host slowly scavenges)
 - *Applied to a Register (Scale Down):* Modifies the object to be small, light, or minor.
-  - `- [s i r]` (A small wire)
+- `- [s i r]` (A small wire)
 
 *[ THE INCREMENT (`+`) ]*
 - *Applied to an Opcode (Overclock):* Executes the action rapidly, aggressively, or with high power.
-  - `+ [m.f i r]` (I run fast)
+- `+ [m.]  [f i r]` (Local Host runs fast)
 - *Applied to a Register (Scale Up):* Modifies the object to be large, heavy, or major.
-  - `+ [q' r i]` (A massive drone / A heavy drone)
+- `+ [q' r i]` (A massive drone / A heavy drone)
 
 *[ THE MULTIPLIER (`*`) ]*
 - *Applied to an Opcode (Loop):* Executes the action repeatedly or continuously.
-  - `* [m.h i sh]` (I repeatedly broadcast)
+- `* [m.]  [h i sh]` (Local Host repeatedly broadcasts)
 - *Applied to a Register (The Absolute Plural):* Allocates an array of multiple instances. This serves as the universal plural marker. 
   - `* [t' a r]` (Builders)
   - `* [q' r i]` (A drone swarm / Many drones)
 
-  == 10. Data Allocation (Namespaces and Pointers)
+== 10. Data Allocation (Namespaces and Pointers)
 
-Just as ALU operators change their function depending on what they modify, Arta overloads Subject Prefixes and Vector Offsets to manage physical inventory and spatial pointing.
+Just as ALU operators change their function depending on what they modify, Arta overloads Context Pointers and Vector Offsets to manage physical inventory and spatial pointing.
 
 *[ NAMESPACES (POSSESSION) ]* \
-To claim possession of a physical object, a Tarbit treats their Subject Prefix as a namespace. Attaching a Subject Prefix directly to a Noun (instead of a Verb) assigns ownership of that register.
+To claim possession of a physical object, a Tarbit treats their Context Pointer as a namespace. Placing a Context Pointer directly before a Register (instead of an Opcode) assigns ownership of that data block.
 
-- `[m.]` (My)
-- `[n.]` (Our)
-- `[k.]` (Your)
-- `[sh.]` (Their / Its)
+- `[m.]` (Local Host Namespace / My)
+- `[n.]` (Local Cluster Namespace / Our)
+- `[k.]` (Target Client Namespace / Your)
+- `[sh.]` (External Node Namespace / Their / Its)
 
 *Example: Possession*
-> "I scavenge your wire."
-- `[m.k' a x]  .  [k.s i r]`
-- (I-scavenge [THEN] Your-wire)
+> "Local Host scavenges Target Client's wire."
+- `[m.]  [k' a x]  .  [k.]  [s i r]`
+- (Local Host scavenges [THEN] Client's wire)
 
 *[ MEMORY POINTERS (DEMONSTRATIVES) ]* \
 When a Tarbit needs to distinguish between two identical objects in physical space (This vs. That), they overload the In/Out Vector Offsets to act as local and external memory pointers.
@@ -205,6 +217,6 @@ When a Tarbit needs to distinguish between two identical objects in physical spa
 - `[h.]` (External Pointer / THAT): The object is "Out" of reach or distant.
 
 *Example: Pointing*
-> "This tool is broken. I need that tool."
-- `[x.] [f.t' u c]  .  [m.c i r]  [h.t' u c]`
-- (Null This-tool [THEN] I-fetch That-tool)
+> "This tool is broken. Local Host needs that tool."
+- `[x.]  [f.]  [t' u c]  .  [m.]  [c i r]  [h.]  [t' u c]`
+- (Null This tool [THEN] Local Host fetches That tool)

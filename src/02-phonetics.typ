@@ -34,7 +34,6 @@ Used for continuous, looping actions in the language. They mimic the sound of fa
 #v(1em)
 
 *[ 1.4 THE GRID HUMS (MONOTONE SONORANTS) ]* \
-Used almost exclusively for the human Subject prefixes (`[m.]` for I/Me, `[n.]` for We). They must be spoken without any human inflection---entirely flat.
 
 - *[m]*: A low, 50/60Hz transformer hum.
 - *[n]*: A slightly higher-pitched electrical whine.

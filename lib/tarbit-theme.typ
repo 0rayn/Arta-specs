@@ -218,6 +218,7 @@
   "c.":  (ipa: "ǀ.",  segments: (g:true, e:true, d:true, dp:true)),         // IF
   "x.":  (ipa: "x.",  segments: (e:true, g:true, b:true, dp:true)),         // NOT
   "r.":  (ipa: "r.",  segments: (e:true, g:true, c:true, dp:true)),         // or
+ "gh.":  (ipa: "ʁ",   segments: (f:true, a:true, b:true, g:true, dp:true)), // and
 
   // --- pull ---
   "q'.": (ipa: "qʼ.", segments: (b:true, c:true, g:true, dp:true)),         // Heavy Breaker

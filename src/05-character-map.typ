@@ -33,13 +33,14 @@ This appendix serves as the master register for field-scraping and terminal-emul
   [ *[u]* (Low) \ #arta("u") ]
 )
 
-== 3. The Subject Registers (Prefixes)
+== 3. Thread Contexts (System Pointers)
 #grid(
-  columns: (1fr, 1fr, 1fr),
+  columns: (1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[m]* + DP \ #arta("m.") ],
-  [ *[n]* + DP \ #arta("n.") ],
-  [ *[k]* + DP \ #arta("k.") ]
+  [ *[m.]* (Host) \ #arta("m.") ],
+  [ *[n.]* (Cluster) \ #arta("n.") ],
+  [ *[k.]* (Client) \ #arta("k.") ],
+  [ *[sh.]* (External) \ #arta("sh.") ]
 )
 
 #v(200pt)

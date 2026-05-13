@@ -37,5 +37,6 @@
     "q'.": "modifier: [QUERY FLAG] The Breaker dot. Casts the following phrase as a polling request for data (Question).",
     "k'.": "modifier: [AND GATE] The Cracking Relay dot. Binds two conditions, registers, or opcodes together (Boolean AND).",
     "r.": "modifier: [OR GATE] The Motor Trill dot. Offers a diverging branch between two choices (Boolean OR).",
+    "gh.": "modifier: [AND GATE] The Platter dot. Binds two conditions, registers, or opcodes together on a single logical track (Boolean AND).",
     ".": "modifier: [EXECUTION TRIGGER] The Hardware Bus. Acts as a 'THEN' gate, bridging a logical condition to its resulting execution."
 }
