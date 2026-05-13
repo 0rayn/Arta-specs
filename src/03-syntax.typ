@@ -180,3 +180,31 @@ The Arithmetic Logic Unit (ALU) symbols do more than just math. When placed befo
 - *Applied to a Register (The Absolute Plural):* Allocates an array of multiple instances. This serves as the universal plural marker. 
   - `* [t' a r]` (Builders)
   - `* [q' r i]` (A drone swarm / Many drones)
+
+  == 10. Data Allocation (Namespaces and Pointers)
+
+Just as ALU operators change their function depending on what they modify, Arta overloads Subject Prefixes and Vector Offsets to manage physical inventory and spatial pointing.
+
+*[ NAMESPACES (POSSESSION) ]* \
+To claim possession of a physical object, a Tarbit treats their Subject Prefix as a namespace. Attaching a Subject Prefix directly to a Noun (instead of a Verb) assigns ownership of that register.
+
+- `[m.]` (My)
+- `[n.]` (Our)
+- `[k.]` (Your)
+- `[sh.]` (Their / Its)
+
+*Example: Possession*
+> "I scavenge your wire."
+- `[m.k' a x]  .  [k.s i r]`
+- (I-scavenge [THEN] Your-wire)
+
+*[ MEMORY POINTERS (DEMONSTRATIVES) ]* \
+When a Tarbit needs to distinguish between two identical objects in physical space (This vs. That), they overload the In/Out Vector Offsets to act as local and external memory pointers.
+
+- `[f.]` (Local Pointer / THIS): The object is "In" the immediate vicinity or in hand.
+- `[h.]` (External Pointer / THAT): The object is "Out" of reach or distant.
+
+*Example: Pointing*
+> "This tool is broken. I need that tool."
+- `[x.] [f.t' u c]  .  [m.c i r]  [h.t' u c]`
+- (Null This-tool [THEN] I-fetch That-tool)
