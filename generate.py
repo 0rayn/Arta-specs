@@ -7,8 +7,8 @@ import sys
 # --- Configuration ---
 DB_FILE = "arta_sys_archive.json"
 
-# Updated to use the 1:1 QWERTY Character Map
-CONSONANTS = ["t", "j", "q", "c", "s", "w", "x", "f", "h", "v", "r", "g"]
+# 1:1 QWERTY Character Map (v2.2)
+CONSONANTS = ["m", "n", "k", "w", "t", "q", "c", "p", "s", "x", "f", "v", "r", "g"]
 VOWELS = ["i", "a", "u"]
 
 def load_db():
@@ -30,10 +30,11 @@ def generate_random_word(pattern):
             word_parts.append(random.choice(VOWELS))
         else:
             raise ValueError(f"Invalid pattern character: {char}. Use 'C' or 'V'.")
-    return " ".join(word_parts)
+    # Return as a contiguous string (no spaces)
+    return "".join(word_parts)
 
 def main():
-    parser = argparse.ArgumentParser(description="Arta Lexicon Root Generator (Interactive Pipeline)")
+    parser = argparse.ArgumentParser(description="Arta Lexicon Root Generator (Contiguous Pipeline)")
     parser.add_argument("-p", "--pattern", type=str, default="CVC", help="Syllable pattern, e.g., CVC, CV, VC")
     parser.add_argument("-s", "--startswith", type=str, default=None, help="Filter: must start with this sound (e.g., t)")
     parser.add_argument("-l", "--limit", type=int, default=1, help="Number of new roots to successfully allocate")
@@ -53,7 +54,8 @@ def main():
         attempts += 1
         word = generate_random_word(args.pattern.upper())
         
-        if args.startswith and not word.startswith(args.startswith + " "):
+        # Check startswith without spaces
+        if args.startswith and not word.startswith(args.startswith):
             continue
             
         if word not in db and word not in new_roots:
