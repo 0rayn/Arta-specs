@@ -1,6 +1,6 @@
 #set text(font: ("Linux Libertine", "DejaVu Sans", "Liberation Sans"))
 
-#import "lib/tarbit-theme.typ": tarbit-doc, lexicon
+#import "lib/tarbit-theme.typ": tarbit-doc
 
 #show: tarbit-doc.with(
   title: "ARTA: The Language of YonaOS"

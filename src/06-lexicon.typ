@@ -7,177 +7,193 @@
 #box(width: 100%, stroke: 1pt + black, inset: 1.5em, fill: rgb("#fcfcfc"))[
   #set text(size: 9.5pt)
   *THE LEXICON MEMORY MAP* \
-  The Arta dictionary is not sorted alphabetically; it is sorted by hardware execution priority. The logic system loads baseline acoustic signals first (Opcodes and Power States). Once the physical hardware is established, execution crosses the *DP Boundary* to process syntax modifiers (The "Dotted" Registers and Flags).
+  The Arta dictionary is mapped directly to standard QWERTY inputs. The logic system loads baseline acoustic signals first (Lowercase letters). Once the physical hardware is established, execution crosses the *Shift Boundary* to process syntax modifiers (Uppercase letters).
 
   #v(1em)
   #align(center)[
     #table(
-      columns: (60pt, 1fr, 2fr),
+      columns: (110pt, 1fr, 2fr),
       align: (center + horizon, left + horizon, left + horizon),
       stroke: (x, y) => if y == 0 { (bottom: 1pt + black) } else { (bottom: 0.5pt + luma(200)) },
       
-      [*SECTOR*], [*HARDWARE CLASS*], [*RAW INPUTS*],
+      [*QWERTY MAP*], [*HARDWARE CLASS*], [*RAW INPUTS*],
       
       // BASE HARDWARE
-      text(font: "monospace")[0x0], [*Grid Hums*], [`m, n, k`],
-      text(font: "monospace")[0x1], [*Relays & Switches*], [`t', k', q', c`],
-      text(font: "monospace")[0x2], [*Static & Vents*], [`s, sh, x, f, h, gh`],
-      text(font: "monospace")[0x3], [*Failing Motors*], [`r, ng`],
-      text(font: "monospace")[0x4], [*Power States*], [`i, a, u`],
+      text(font: "monospace")[Lowercase], [*Grid Hums*], [`m, n, k`],
+      text(font: "monospace")[Lowercase], [*Relays/Switches*], [`t, j, q, c`],
+      text(font: "monospace")[Lowercase], [*Static & Vents*], [`s, w, x, f, h, v`],
+      text(font: "monospace")[Lowercase], [*Failing Motors*], [`r, g`],
+      text(font: "monospace")[Lowercase], [*Power States*], [`i, a, u`],
       
-      // THE DP BOUNDARY
+      // THE SHIFT BOUNDARY
       table.cell(
         colspan: 3, 
         fill: rgb("#eeeeee"), 
         align: center, 
         inset: 0.8em
       )[
-        #text(weight: "bold", tracking: 0.2em, size: 8pt)[--- THE DP BOUNDARY (MODIFIERS) ---]
+        #text(weight: "bold", tracking: 0.2em, size: 8pt)[--- THE SHIFT BOUNDARY (MODIFIERS) ---]
       ],
       
-      // DOTTED STUFF
-      text(font: "monospace")[0x5], [*Subject Registers*], [`m., n., k.`],
-      text(font: "monospace")[0x6], [*Timeline Flags*], [`i., a., u.`],
-      text(font: "monospace")[0x7], [*Logic Gates*], [`c., x.`],
-      text(font: "monospace")[0x8], [*Vector Offsets*], [`t'., s., f., h., ng.`],
-      text(font: "monospace")[0x9], [*The Hardware Bus*], [`.`]
+      // UPPERCASE / SYSTEM KEYS
+      text(font: "monospace")[Uppercase], [*Subject Registers*], [`M, N, K, W`],
+      text(font: "monospace")[Uppercase], [*Timeline Flags*], [`I, A, U`],
+      text(font: "monospace")[Uppercase], [*Logic Gates*], [`C, X, R, V`],
+      text(font: "monospace")[Uppercase], [*Vector Offsets*], [`T, S, F, H, G`],
+      text(font: "monospace")[System Keys], [*Execution Triggers*], [`. , ..`]
     )
   ]
 ]
 #v(2em)
 
 // ========================================
-== SECTOR [ t' ] // SHARP SWITCH
+== SECTOR [ t ] // SHARP SWITCH [T']
 
-#lexicon-entry("t' i k'", "noun: A logical pointer directing execution to a specific hardware address.")
-#lexicon-entry("t' u c", "noun: A physical, hand-held maintenance tool.")
-
-// ========================================
-== SECTOR [ k' ] // CRACKING RELAY
-
-#lexicon-entry("k' i x", "verb: To permanently flash or burn data onto a hardened ROM chip.")
-#lexicon-entry("k' a x", "verb: To physically strip or scavenge a hardware component from a larger system.")
+#lexicon-entry("t i j", "noun: [t' i k'] A logical pointer directing execution to a specific hardware address.")
+#lexicon-entry("t u c", "noun: [t' u c] A physical, hand-held maintenance tool.")
 
 // ========================================
-== SECTOR [ q' ] // HEAVY BREAKER
+== SECTOR [ j ] // CRACKING RELAY [K']
 
-#lexicon-entry("q' r i", "noun: An active, autonomous Martas defense drone.")
-#lexicon-entry("q' a", "noun: A physically insulated, offline sanctuary safe from network intrusion.")
-#lexicon-entry("q' u t'", "verb: To logically partition or reserve a sector of raw storage.")
+#lexicon-entry("j i x", "verb: [k' i x] To permanently flash or burn data onto a hardened ROM chip.")
+#lexicon-entry("j a x", "verb: [k' a x] To physically strip or scavenge a hardware component.")
+
+// ========================================
+== SECTOR [ q ] // HEAVY BREAKER [Q']
+
+#lexicon-entry("q r i", "noun: [q' r i] An active, autonomous Martas defense drone.")
+#lexicon-entry("q a", "noun: [q' a] A physically insulated, offline sanctuary safe from network intrusion.")
+#lexicon-entry("q u t", "verb: [q' u t'] To logically partition or reserve a sector of raw storage.")
 
 // ========================================
 == SECTOR [ c ] // MAGNETIC RELAY
 
-#lexicon-entry("c i t'", "noun: An environmental or industrial hardware sensor (e.g., accelerometer or gyro).")
-#lexicon-entry("c i r", "verb: To fetch or read raw data from a specific memory address.")
-#lexicon-entry("c a c", "verb: To physically splice or bridge two live electrical wires.")
+#lexicon-entry("c i t", "noun: [c i t'] An environmental or industrial hardware sensor.")
+#lexicon-entry("c i r", "verb: [c i r] To fetch or read raw data from a specific memory address.")
+#lexicon-entry("c a c", "verb: [c a c] To physically splice or bridge two live electrical wires.")
 
 // ========================================
 == SECTOR [ s ] // HIGH STATIC
 
-#lexicon-entry("s i r", "noun: A physical copper wire or data bus.")
-#lexicon-entry("s u ng", "noun: A temporary data buffer or holding queue.")
+#lexicon-entry("s i r", "noun: [s i r] A physical copper wire or data bus.")
+#lexicon-entry("s u g", "noun: [s u ng] A temporary data buffer or holding queue.")
 
 // ========================================
 == SECTOR [ x ] // FRICTION SCRAPE
 
-#lexicon-entry("x i sh", "noun: A mid-frequency radio transmission or broadcast signal.")
-#lexicon-entry("x a", "noun: An empty, unwritten sector of memory; a null pointer.")
+#lexicon-entry("x i w", "noun: [x i sh] A mid-frequency radio transmission or broadcast signal.")
+#lexicon-entry("x a", "noun: [x a] An empty, unwritten sector of memory; a null pointer.")
 
 // ========================================
 == SECTOR [ f ] // PRESSURE VENT
 
-#lexicon-entry("f i r", "verb: To execute a continuous software process or loop.")
-#lexicon-entry("f a c", "verb: To securely flush a buffer or drop a software connection.")
-#lexicon-entry("f u x", "noun: Liquid coolant or industrial fluid used in thermal management.")
+#lexicon-entry("f i r", "verb: [f i r] To execute a continuous software process or loop.")
+#lexicon-entry("f a c", "verb: [f a c] To securely flush a buffer or drop a software connection.")
+#lexicon-entry("f u x", "noun: [f u x] Liquid coolant or industrial fluid used in thermal management.")
 
 // ========================================
 == SECTOR [ h ] // SHARED EXHAUST
 
-#lexicon-entry("h i sh", "verb: To echo or output a raw signal through a hardware terminal.")
-#lexicon-entry("h u sh", "verb: To place a system into a low-voltage idle or standby state.")
+#lexicon-entry("h i w", "verb: [h i sh] To echo or output a raw signal through a hardware terminal.")
+#lexicon-entry("h u w", "verb: [h u sh] To place a system into a low-voltage idle or standby state.")
 
 // ========================================
-== SECTOR [ gh ] // PLATTER SPIN
+== SECTOR [ v ] // PLATTER SPIN [GH]
 
-#lexicon-entry("gh a sh", "verb: To aggressively overclock a hardware component past its stable baseline.")
+#lexicon-entry("v a w", "verb: [gh a sh] To aggressively overclock a hardware component.")
 
 // ========================================
 == SECTOR [ a ] // NEUTRAL POWER STATE
 
-#lexicon-entry("a r t' a", "noun: The root execution language and underlying logic of the enclave.")
+#lexicon-entry("a r t a", "noun: [a r t' a] The root execution language and underlying logic of the enclave.")
 
 // ========================================
-== SECTOR [ m. ] // SUBJECT REGISTER (I/ME)
+== SECTOR [ M ] // SUBJECT REGISTER (HOST)
 
-#lexicon-entry("m.", "prefix: [FIRST PERSON] Binds the opcode execution to the speaker (I/Me).")
-
-// ========================================
-== SECTOR [ n. ] // SUBJECT REGISTER (WE)
-
-#lexicon-entry("n.", "prefix: [FIRST PLURAL] Binds the opcode execution to the speaker's group (We).")
+#lexicon-entry("M", "prefix: [m. HOST] Binds an opcode to the speaker (I/Me), or assigns local possession (My).")
 
 // ========================================
-== SECTOR [ k. ] // SUBJECT REGISTER (YOU)
+== SECTOR [ N ] // SUBJECT REGISTER (CLUSTER)
 
-#lexicon-entry("k.", "prefix: [SECOND PERSON] Binds the opcode execution to the target entity (You).")
-
-// ========================================
-== SECTOR [ sh. ] // SUBJECT REGISTER (EXTERNAL/IT)
-
-#lexicon-entry("sh.", "prefix: [EXTERNAL POINTER] Binds the opcode execution to a third-party or unidentified entity (He/She/It/They).")
+#lexicon-entry("N", "prefix: [n. CLUSTER] Binds an opcode to the speaker's group (We), or assigns group possession (Our).")
 
 // ========================================
-== SECTOR [ c. ] // LOGIC GATE (COMPARE/IF)
+== SECTOR [ K ] // SUBJECT REGISTER (CLIENT)
 
-#lexicon-entry("c.", "modifier: [GATE] The Relay dot. Evaluates the following phrase as a condition (IF).")
-
-// ========================================
-== SECTOR [ x. ] // LOGIC GATE (NOT/INVERT)
-
-#lexicon-entry("x.", "modifier: [NOT] The Friction dot. Inverts or nullifies the following opcode or register (NO/FALSE).")
+#lexicon-entry("K", "prefix: [k. CLIENT] Binds an opcode to the target (You), or assigns target possession (Your).")
 
 // ========================================
-== SECTOR [ q'. ] // LOGIC GATE (POLLING/QUERY)
+== SECTOR [ W ] // SUBJECT REGISTER (EXTERNAL/IT)
 
-#lexicon-entry("q'.", "modifier: [QUERY FLAG] The Breaker dot. Casts the following phrase as a polling request for data (Question).")
-
-// ========================================
-== SECTOR [ t'. ] // VECTOR OFFSET (AT/PIN)
-
-#lexicon-entry("t'.", "modifier: [VECTOR PIN] The Switch dot. Indicates an exact, physical connection or adjacent location (at/on).")
+#lexicon-entry("W", "prefix: [sh. EXTERNAL] Binds an opcode to a third-party, or assigns external possession.")
 
 // ========================================
-== SECTOR [ s. ] // VECTOR OFFSET (ABOVE)
+== SECTOR [ C ] // LOGIC GATE (COMPARE/IF)
 
-#lexicon-entry("s.", "modifier: [VECTOR HIGH] The Static dot. Indicates location above, on top of, or at a higher physical elevation.")
-
-// ========================================
-== SECTOR [ f. ] // VECTOR OFFSET (INSIDE)
-
-#lexicon-entry("f.", "modifier: [VECTOR IN] The Vent dot. Indicates movement into or location inside a structure or port.")
+#lexicon-entry("C", "modifier: [c. IF GATE] Evaluates the following phrase as a condition.")
 
 // ========================================
-== SECTOR [ h. ] // VECTOR OFFSET (OUTSIDE)
+== SECTOR [ X ] // LOGIC GATE (NOT/INVERT)
 
-#lexicon-entry("h.", "modifier: [VECTOR OUT] The Exhaust dot. Indicates movement out of or location external to a structure.")
-
-// ========================================
-== SECTOR [ ng. ] // VECTOR OFFSET (BELOW)
-
-#lexicon-entry("ng.", "modifier: [VECTOR LOW] The Drone dot. Indicates location below, underneath, or grounded beneath an object.")
+#lexicon-entry("X", "modifier: [x. NOT GATE] Inverts or nullifies the following opcode or register.")
 
 // ========================================
-== SECTOR [ i. ] // EXECUTION QUEUE (FUTURE)
+== SECTOR [ V ] // LOGIC GATE (BOOLEAN AND)
 
-#lexicon-entry("i.", "modifier: [QUEUED] The High-State dot. Indicates an action scheduled to happen (Future).")
-
-// ========================================
-== SECTOR [ a. ] // EXECUTION ACTIVE (PRESENT)
-
-#lexicon-entry("a.", "modifier: [ACTIVE] The Neutral-State dot. Indicates an action currently executing (Present).")
+#lexicon-entry("V", "modifier: [gh. AND GATE] Binds two conditions or opcodes together on a single logical track.")
 
 // ========================================
-== SECTOR [ u. ] // EXECUTION LOGGED (PAST)
+== SECTOR [ R ] // LOGIC GATE (BOOLEAN OR)
 
-#lexicon-entry("u.", "modifier: [LOGGED] The Low-State dot. Indicates an action that has concluded and written to memory (Past).")
+#lexicon-entry("R", "modifier: [r. OR GATE] Offers a diverging branch between two choices.")
+
+// ========================================
+== SECTOR [ Q ] // LOGIC GATE (POLLING/QUERY)
+
+#lexicon-entry("Q", "modifier: [q'. QUERY] Casts the following phrase as a polling request for data (Question).")
+
+// ========================================
+== SECTOR [ T ] // VECTOR OFFSET (AT/PIN)
+
+#lexicon-entry("T", "modifier: [t'. VECTOR AT] Indicates an exact, physical connection or adjacent location.")
+
+// ========================================
+== SECTOR [ S ] // VECTOR OFFSET (ABOVE)
+
+#lexicon-entry("S", "modifier: [s. VECTOR ABOVE] Indicates location above, on top of, or at a higher physical elevation.")
+
+// ========================================
+== SECTOR [ F ] // VECTOR OFFSET (INSIDE)
+
+#lexicon-entry("F", "modifier: [f. VECTOR IN / THIS] Indicates movement inside, or acts as a local memory pointer.")
+
+// ========================================
+== SECTOR [ H ] // VECTOR OFFSET (OUTSIDE)
+
+#lexicon-entry("H", "modifier: [h. VECTOR OUT / THAT] Indicates movement outside, or acts as an external memory pointer.")
+
+// ========================================
+== SECTOR [ G ] // VECTOR OFFSET (BELOW)
+
+#lexicon-entry("G", "modifier: [ng. VECTOR BELOW] Indicates location below, underneath, or grounded.")
+
+// ========================================
+== SECTOR [ I ] // EXECUTION QUEUE (FUTURE)
+
+#lexicon-entry("I", "modifier: [i. QUEUED] Indicates an action scheduled to happen (Future).")
+
+// ========================================
+== SECTOR [ A ] // EXECUTION ACTIVE (PRESENT)
+
+#lexicon-entry("A", "modifier: [a. ACTIVE] Indicates an action currently executing (Present).")
+
+// ========================================
+== SECTOR [ U ] // EXECUTION LOGGED (PAST)
+
+#lexicon-entry("U", "modifier: [u. LOGGED] Indicates an action that has concluded and written to memory (Past).")
+
+// ========================================
+== SECTOR [ . ] // SYSTEM MODIFIER
+
+#lexicon-entry(".", "modifier: [EXECUTION TRIGGER] The Hardware Bus. Acts as a 'THEN' gate.")
+#lexicon-entry(". .", "modifier: [SYSTEM HALT / EOF] End of File. Clears all active thread contexts.")

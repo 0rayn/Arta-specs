@@ -4,37 +4,41 @@ import os
 DB_FILE = "arta_sys_archive.json"
 OUTPUT_FILE = "src/06-lexicon.typ"
 
-# The absolute sorting hierarchy of the Arta machine logic
+# The absolute sorting hierarchy of the Arta machine logic (QWERTY Mapped)
 ARTA_ALPHABET = [
+    # Lowercase: Base Hardware
     "m", "n", "k",               # Base Forms / Grid Hums
-    "t'", "k'", "q'", "c",       # Opcodes: Switches & Relays
-    "s", "sh", "x", "f", "h", "gh", # Opcodes: Static & Vents
-    "r", "ng",                   # Opcodes: Motors
+    "t", "j", "q", "c",          # Opcodes: Switches & Relays (t', k', q', c)
+    "s", "w", "x", "f", "h", "v",# Opcodes: Static & Vents (s, sh, x, f, h, gh)
+    "r", "g",                    # Opcodes: Motors (r, ng)
     "i", "a", "u",               # Registers / Power States
-    "m.", "n.", "k.", "sh.",     # Subject Prefixes (Dotted)
-    "c.", "x.", "k'.", "r.", "q'.", # Logic Gates & Queries (Dotted)
-    "t'.", "s.", "f.", "h.", "ng.", # Vector Offsets (Dotted)
-    "i.", "a.", "u.",            # Timeline Flags (Dotted)
+    
+    # Uppercase: Shift Boundary Modifiers
+    "M", "N", "K", "W",          # Subject Contexts (Host, Cluster, Client, Ext)
+    "C", "X", "V", "R", "Q",     # Gates & Queries (IF, NOT, AND, OR, Query)
+    "T", "S", "F", "H", "G",     # Vector Offsets (At, Above, In, Out, Below)
+    "I", "A", "U",               # Timeline Flags (Future, Present, Past)
+    
+    # System Keys
     "+", "-", "*", "/", "=",     # ALU Operators
-    "."                          # then
+    ".", ". ."                   # THEN Gate, EOF
 ]
 
 # Hardware descriptions for the dictionary headers
 SECTOR_METADATA = {
     "m": "Low Grid Hum", "n": "High Grid Whine", "k": "Base Bracket",
-    "m.": "Subject Register (I/Me)", "n.": "Subject Register (We)", "k.": "Subject Register (You)",
-    "c.": "Logic Gate (Compare/If)", "x.": "Logic Gate (Not/Invert)",
-    "t'.": "Vector Offset (At/Pin)", "s.": "Vector Offset (Above)", "f.": "Vector Offset (Inside)", "h.": "Vector Offset (Outside)", "ng.": "Vector Offset (Below)",
-    "t'": "Sharp Switch", "k'": "Cracking Relay", "q'": "Heavy Breaker", "c": "Magnetic Relay",
-    "s": "High Static", "sh": "Mid Static", "x": "Friction Scrape", "f": "Pressure Vent", 
-    "h": "Shared Exhaust", "gh": "Platter Spin",
-    "r": "Motor Trill", "ng": "Electronic Drone",
+    "M": "Subject Register (Host)", "N": "Subject Register (Cluster)", "K": "Subject Register (Client)", "W": "Subject Register (External/It)",
+    "C": "Logic Gate (Compare/If)", "X": "Logic Gate (Not/Invert)",
+    "T": "Vector Offset (At/Pin)", "S": "Vector Offset (Above)", "F": "Vector Offset (Inside)", "H": "Vector Offset (Outside)", "G": "Vector Offset (Below)",
+    "t": "Sharp Switch [t']", "j": "Cracking Relay [k']", "q": "Heavy Breaker [q']", "c": "Magnetic Relay",
+    "s": "High Static", "w": "Mid Static [sh]", "x": "Friction Scrape", "f": "Pressure Vent", 
+    "h": "Shared Exhaust", "v": "Platter Spin [gh]",
+    "r": "Motor Trill", "g": "Electronic Drone [ng]",
     "i": "High Power State", "a": "Neutral Power State", "u": "Low Power State",
-    "sh.": "Subject Register (External/It)",
-    "q'.": "Logic Gate (Polling/Query)",
-    "k'.": "Logic Gate (Boolean AND)",
-    "r.": "Logic Gate (Boolean OR)",
-    "i.": "Execution Queue (Future)", "a.": "Execution Active (Present)", "u.": "Execution Logged (Past)"
+    "Q": "Logic Gate (Polling/Query)",
+    "V": "Logic Gate (Boolean AND)",
+    "R": "Logic Gate (Boolean OR)",
+    "I": "Execution Queue (Future)", "A": "Execution Active (Present)", "U": "Execution Logged (Past)"
 }
 
 SORT_WEIGHT = {sound: index for index, sound in enumerate(ARTA_ALPHABET)}
@@ -45,40 +49,40 @@ MEMORY_MAP_TYPST = """
 #box(width: 100%, stroke: 1pt + black, inset: 1.5em, fill: rgb("#fcfcfc"))[
   #set text(size: 9.5pt)
   *THE LEXICON MEMORY MAP* \\
-  The Arta dictionary is not sorted alphabetically; it is sorted by hardware execution priority. The logic system loads baseline acoustic signals first (Opcodes and Power States). Once the physical hardware is established, execution crosses the *DP Boundary* to process syntax modifiers (The "Dotted" Registers and Flags).
+  The Arta dictionary is mapped directly to standard QWERTY inputs. The logic system loads baseline acoustic signals first (Lowercase letters). Once the physical hardware is established, execution crosses the *Shift Boundary* to process syntax modifiers (Uppercase letters).
 
   #v(1em)
   #align(center)[
     #table(
-      columns: (60pt, 1fr, 2fr),
+      columns: (110pt, 1fr, 2fr),
       align: (center + horizon, left + horizon, left + horizon),
       stroke: (x, y) => if y == 0 { (bottom: 1pt + black) } else { (bottom: 0.5pt + luma(200)) },
       
-      [*SECTOR*], [*HARDWARE CLASS*], [*RAW INPUTS*],
+      [*QWERTY MAP*], [*HARDWARE CLASS*], [*RAW INPUTS*],
       
       // BASE HARDWARE
-      text(font: "monospace")[0x0], [*Grid Hums*], [`m, n, k`],
-      text(font: "monospace")[0x1], [*Relays & Switches*], [`t', k', q', c`],
-      text(font: "monospace")[0x2], [*Static & Vents*], [`s, sh, x, f, h, gh`],
-      text(font: "monospace")[0x3], [*Failing Motors*], [`r, ng`],
-      text(font: "monospace")[0x4], [*Power States*], [`i, a, u`],
+      text(font: "monospace")[Lowercase], [*Grid Hums*], [`m, n, k`],
+      text(font: "monospace")[Lowercase], [*Relays/Switches*], [`t, j, q, c`],
+      text(font: "monospace")[Lowercase], [*Static & Vents*], [`s, w, x, f, h, v`],
+      text(font: "monospace")[Lowercase], [*Failing Motors*], [`r, g`],
+      text(font: "monospace")[Lowercase], [*Power States*], [`i, a, u`],
       
-      // THE DP BOUNDARY
+      // THE SHIFT BOUNDARY
       table.cell(
         colspan: 3, 
         fill: rgb("#eeeeee"), 
         align: center, 
         inset: 0.8em
       )[
-        #text(weight: "bold", tracking: 0.2em, size: 8pt)[--- THE DP BOUNDARY (MODIFIERS) ---]
+        #text(weight: "bold", tracking: 0.2em, size: 8pt)[--- THE SHIFT BOUNDARY (MODIFIERS) ---]
       ],
       
-      // DOTTED STUFF
-      text(font: "monospace")[0x5], [*Subject Registers*], [`m., n., k.`],
-      text(font: "monospace")[0x6], [*Timeline Flags*], [`i., a., u.`],
-      text(font: "monospace")[0x7], [*Logic Gates*], [`c., x.`],
-      text(font: "monospace")[0x8], [*Vector Offsets*], [`t'., s., f., h., ng.`],
-      text(font: "monospace")[0x9], [*The Hardware Bus*], [`.`]
+      // UPPERCASE / SYSTEM KEYS
+      text(font: "monospace")[Uppercase], [*Subject Registers*], [`M, N, K, W`],
+      text(font: "monospace")[Uppercase], [*Timeline Flags*], [`I, A, U`],
+      text(font: "monospace")[Uppercase], [*Logic Gates*], [`C, X, R, V`],
+      text(font: "monospace")[Uppercase], [*Vector Offsets*], [`T, S, F, H, G`],
+      text(font: "monospace")[System Keys], [*Execution Triggers*], [`. , ..`]
     )
   ]
 ]
@@ -102,31 +106,25 @@ def compile_lexicon():
 
     print(f"[*] Loaded {len(db)} entries from archive.")
 
-    # Sort the keys
     sorted_words = sorted(db.keys(), key=arta_sort_key)
     print("[*] Lexicon array sorted via hardware hierarchy.")
 
     with open(OUTPUT_FILE, "w") as f:
-        # Write the Typst headers
         f.write("#import \"../lib/tarbit-theme.typ\": arta\n")
         f.write("#import \"../lib/tarbit-theme.typ\": lexicon-entry\n\n")
         f.write("= The Scavenger's Lexicon: Compiled Archive\n")
         
-        # INJECT THE MEMORY MAP HERE
         f.write(MEMORY_MAP_TYPST)
 
         current_sector = None
 
         for word in sorted_words:
-            # Extract the first sound of the word
             first_sound = word.split()[0]
 
-            # If we cross into a new character territory, inject a header
             if first_sound != current_sector:
                 current_sector = first_sound
-                hardware_desc = SECTOR_METADATA.get(current_sector, "Unknown Hardware")
+                hardware_desc = SECTOR_METADATA.get(current_sector, "System Modifier")
                 
-                # Write the territory divider
                 f.write(f"\n// {'=' * 40}\n")
                 f.write(f"== SECTOR [ {current_sector} ] // {hardware_desc.upper()}\n\n")
 

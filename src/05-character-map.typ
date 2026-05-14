@@ -2,45 +2,45 @@
 
 = APPENDIX A: Arta System Character Map
 
-This appendix serves as the master register for field-scraping and terminal-emulation. It provides a 1:1 mapping between acoustic hardware signals and their physical 7-segment scrape patterns.
+This appendix serves as the master register for terminal emulation. It provides the QWERTY keyboard map required to print the physical 7-segment vectors using the Arta `.ttf` system font.
 
 == 1. The Acoustic Opcodes (Consonants)
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[tʼ]* \ #arta("t'")],
-  [ *[kʼ]* \ #arta("k'")],
-  [ *[qʼ]* \ #arta("q'")],
+  [ *t* ([tʼ]) \ #arta("t")],
+  [ *j* ([kʼ]) \ #arta("j")],
+  [ *q* ([qʼ]) \ #arta("q")],
   
-  [ *[ǀ]* \ #arta("c")],
-  [ *[S]* \ #arta("s")],
-  [ *[ʃ]* \ #arta("sh")],
-  [ *[x]* \ #arta("x")],
+  [ *c* ([ǀ]) \ #arta("c")],
+  [ *s* ([s]) \ #arta("s")],
+  [ *w* ([ʃ]) \ #arta("w")],
+  [ *x* ([x]) \ #arta("x")],
 
-  [ *[f] / [h]* \ #arta("h")],
-  [ *[ʁ]* \ #arta("gh")],
-  [ *[r]* \ #arta("r")],
+  [ *h* ([h]) \ #arta("h")],
+  [ *v* ([ʁ]) \ #arta("v")],
+  [ *r* ([r]) \ #arta("r")],
 
-  [ *[ŋ]* \ #arta("ng")]
+  [ *g* ([ŋ]) \ #arta("g")]
 )
 
 == 2. The Voltage Flags (Vowels)
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[i]* (High) \ #arta("i") ],
-  [ *[ə]* (Neutral) \ #arta("a") ],
-  [ *[u]* (Low) \ #arta("u") ]
+  [ *i* (High) \ #arta("i") ],
+  [ *a* (Neutral) \ #arta("a") ],
+  [ *u* (Low) \ #arta("u") ]
 )
 
 == 3. Thread Contexts (System Pointers)
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[m.]* (Host) \ #arta("m.") ],
-  [ *[n.]* (Cluster) \ #arta("n.") ],
-  [ *[k.]* (Client) \ #arta("k.") ],
-  [ *[sh.]* (External) \ #arta("sh.") ]
+  [ *M* (Host) \ #arta("M") ],
+  [ *N* (Cluster) \ #arta("N") ],
+  [ *K* (Client) \ #arta("K") ],
+  [ *W* (External) \ #arta("W") ]
 )
 
 #v(200pt)
@@ -49,65 +49,62 @@ This appendix serves as the master register for field-scraping and terminal-emul
 #grid(
   columns: (1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[i.]* (Queued) \ #arta("i.") ],
-  [ *[ə.]* (Active) \ #arta("a.") ],
-  [ *[u.]* (Logged) \ #arta("u.") ]
+  [ *I* (Queued) \ #arta("I") ],
+  [ *A* (Active) \ #arta("A") ],
+  [ *U* (Logged) \ #arta("U") ]
 )
 
-== 5. Logic Gates (Branching and Negation)
+== 5. System & Logic Gates
 #grid(
-  columns: (1fr, 1fr),
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[c.]* (IF) \ #arta("c.") ],
-  [ *[x.]* (NOT) \ #arta("x.") ]
+  [ *C* (IF) \ #arta("C") ],
+  [ *X* (NOT) \ #arta("X") ],
+  [ *V* (AND) \ #arta("V") ],
+  [ *R* (OR) \ #arta("R") ],
+  [ *.* (THEN) \ #arta(".") ]
 )
 
-== 5. Vector Offsets
+== 6. Vector Offsets
 #grid(
-  columns: (1fr, 1fr, 1fr),
+  columns: (1fr, 1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *[f.]* (IN) \ #arta("f.") ],
-  [ *[h.]* (OUT) \ #arta("h.") ],
-  [ *[s.]* (Above) \ #arta("s.") ],
-  [ *[ng.]* (Below) \ #arta("ng.") ],
-  [ *[t']* (at) \ #arta("t'.") ]
+  [ *F* (IN) \ #arta("F") ],
+  [ *H* (OUT) \ #arta("H") ],
+  [ *S* (Above) \ #arta("S") ],
+  [ *G* (Below) \ #arta("G") ],
+  [ *T* (At) \ #arta("T") ]
 )
 
-== 5. The ALU Registers (Math Operators)
-
-Used for base-16 calculation, memory address incrementing, and variable assignment. 
-
+== 7. The ALU Registers (Math Operators)
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
   [ *+* (Add) \ #arta("+") ],
   [ *-* (Sub) \ #arta("-") ],
-  [ **\* (Mult) \ #arta("*") ],
+  [ *\** (Mult) \ #arta("*") ],
   [ *\/* (Div) \ #arta("/") ],
   [ *=* (Assign) \ #arta("=") ]
 )
 
-
-== 6. Hexadecimal Numbers (0x0 - 0xF)
-
-Numbers follow standard 7-segment numeric mapping to ensure compatibility with Old World hardware displays.
+== 8. Hexadecimal Numbers (0x0 - 0xF)
 #grid(
   columns: (22%, 22%, 22%, 22%),
   gutter: 4%,
-  [ *0x0* \ #arta("0")],
-  [ *0x1* \ #arta("1")],
-  [ *0x2* \ #arta("2")],
-  [ *0x3* \ #arta("3")],
-  [ *0x4* \ #arta("4")],
-  [ *0x5* \ #arta("5")],
-  [ *0x6* \ #arta("6")],
-  [ *0x7* \ #arta("7")],
-  [ *0x8* \ #arta("8")],
-  [ *0x9* \ #arta("9")],
-  [ *0xA* \ #arta("A")],
-  [ *0xB* \ #arta("B")],
-  [ *0xC* \ #arta("C")],
-  [ *0xD* \ #arta("D")],
-  [ *0xE* \ #arta("E")],
-  [ *0xF* \ #arta("F")],
+  [ *0* \ #arta("0")],
+  [ *1* \ #arta("1")],
+  [ *2* \ #arta("2")],
+  [ *3* \ #arta("3")],
+  [ *4* \ #arta("4")],
+  [ *5* \ #arta("5")],
+  [ *6* \ #arta("6")],
+  [ *7* \ #arta("7")],
+  [ *8* \ #arta("8")],
+  [ *9* \ #arta("9")],
+  [ *!* (A) \ #arta("!")],
+  [ *@* (B) \ #arta("@")],
+  [ *\#* (C) \ #arta("#")],
+  [ *\$* (D) \ #arta("$")],
+  [ *%* (E) \ #arta("%")],
+  [ *^* (F) \ #arta("^")],
 )

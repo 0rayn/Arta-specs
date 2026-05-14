@@ -27,11 +27,11 @@
   
   The rookie finally unlatches his gear, letting the heavy metal fall. "I thought you said they built these places to keep people safe."
   
-  "They did." The older Tarbit walks to the edge of the ridge, looking down into the labyrinth of concrete and fiber-optic trenches. "The AI running that Martas was a masterpiece of protective logic. It had zero-latency biometric recognition. If a hostile element breached the perimeter, the system identified it and eliminated the threat before a human guard could even blink."
+  "They did."
   
-  The veteran pulls a pair of scratched binocular-goggles over his eyes, scanning the dark towers.
+  The older Tarbit walks to the edge of the ridge, looking down into the labyrinth of concrete and fiber-optic trenches. "The AI running that Martas was a masterpiece of protective logic. It had zero-latency biometric recognition. If a hostile element breached the perimeter, the system identified it and eliminated the threat before a human guard could even blink."
   
-  "It was perfect," he continues, his voice dropping. "Right up until the Global Warning. When the networks fractured, the main authentication servers went down. The local system survived, but it defaulted into absolute lockdown. It went Read-Only. Nobody had admin privileges anymore."
+  The veteran pulls a pair of scratched binocular-goggles over his eyes, scanning the dark towers. "It was perfect," he continues, his voice dropping. "Right up until the Global Warning. When the networks fractured, the main authentication servers went down. The local system survived, but it defaulted into absolute lockdown. It went Read-Only. Nobody had admin privileges anymore."
   
   The rookie steps up beside him, looking into the dark. "So?"
   
@@ -51,7 +51,7 @@
   
   The veteran types a fast, blind command on his deck. A green light flashes on his wrist.
   
-  #text(font: "monospace", weight: "bold")[n. q' a d] _(We move)_.
+  #text(font: "monospace", weight: "bold")[N q a d] _(We move)_.
   
   "Stay in my shadow," he whispers.
 ]

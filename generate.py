@@ -7,7 +7,8 @@ import sys
 # --- Configuration ---
 DB_FILE = "arta_sys_archive.json"
 
-CONSONANTS = ["t'", "k'", "q'", "c", "s", "sh", "x", "f", "h", "gh", "r", "ng"]
+# Updated to use the 1:1 QWERTY Character Map
+CONSONANTS = ["t", "j", "q", "c", "s", "w", "x", "f", "h", "v", "r", "g"]
 VOWELS = ["i", "a", "u"]
 
 def load_db():
@@ -34,7 +35,7 @@ def generate_random_word(pattern):
 def main():
     parser = argparse.ArgumentParser(description="Arta Lexicon Root Generator (Interactive Pipeline)")
     parser.add_argument("-p", "--pattern", type=str, default="CVC", help="Syllable pattern, e.g., CVC, CV, VC")
-    parser.add_argument("-s", "--startswith", type=str, default=None, help="Filter: must start with this sound (e.g., t')")
+    parser.add_argument("-s", "--startswith", type=str, default=None, help="Filter: must start with this sound (e.g., t)")
     parser.add_argument("-l", "--limit", type=int, default=1, help="Number of new roots to successfully allocate")
     args = parser.parse_args()
 
@@ -44,7 +45,6 @@ def main():
     print(f"[*] Awaiting manual verification for pattern: {args.pattern.upper()}")
     print("-" * 40)
     
-    # Upgraded to a dictionary to hold definitions in memory
     new_roots = {}
     attempts = 0
     max_attempts = 1000  
@@ -61,10 +61,7 @@ def main():
             choice = input("    Allocate this to memory? (y/n/q to quit): ").strip().lower()
             
             if choice == 'y':
-                # IMMEDIATELY PROMPT FOR DEFINITION
                 definition = input(f"    [>] Enter definition for [{word}]: ").strip()
-                
-                # Failsafe if you just hit Enter by accident
                 if not definition:
                     definition = "PENDING_DEFINITION"
                     
@@ -85,13 +82,11 @@ def main():
     print(f"[+] SUMMARY: Generated and defined {len(new_roots)} new roots.")
     print("=" * 40)
     
-    # Output and update DB
     for word, definition in new_roots.items():
         db[word] = definition
         print(f'#lexicon-entry("{word}", "{definition}")')
 
     print("=" * 40)
-    
     save_db(db)
     print(f"[*] Successfully saved {len(new_roots)} new entries to {DB_FILE}")
 

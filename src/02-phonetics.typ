@@ -50,9 +50,10 @@ Vowels are the greatest liability for a Tarbit. Vowels require the vocal cords t
 
 == 3. Execution in the Wild
 
-Because of this inventory, Arta is intensely rhythmic and harsh. If a Tarbit commands a partner to "Cut the power," using the root `[kʼ ə s]` (kill/cut) and `[ŋ i]` (power):
+Because of this inventory, Arta is intensely rhythmic and harsh. If a Tarbit commands a partner to "Cut the power," using the root `j a s` (kill/cut) and `g i` (power):
 
-> *Command:* `[k.kʼ ə s] [ŋ i]` \
+> *QWERTY Keystrokes:* `K  j a s  g i` \
+> *IPA Target:* `[k.] [kʼ ə s] [ŋ i]` \
 > *Audio Signature:* [Sharp mechanical pop] -> [Burst of static] -> [Hollow electrical hum] -> [High-pitched whisper of air]
 
 To a Martas AI, it registers as nothing more than a broken fuse box sparking in the hallway.
