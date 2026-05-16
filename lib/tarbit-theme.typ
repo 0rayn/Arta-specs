@@ -120,7 +120,7 @@
 
 #let arta-data = (
   // ALU & States
-  "0": "abcdef", "^": "aefg", "+": "fg", "-": "gc", "*": "fgp", "/": "gcp", "=": "dg", ".": "p",
+  "0": "abcdef", "^": "aefg", "+": "fg", "-": "gc", "*": "fgp", "/": "gcp", "=": "dg", ".": "p", ">": "dcg",
   // Hex Numerals
   "1": "bc", "2": "abdeg", "3": "abcdg", "4": "bcfg", "5": "acdfg", "6": "acdefg", "7": "abc", "8": "abcdefg", "9": "abcdfg", "!": "abcefg", "@": "cdefg", "#": "afed", "$": "bcdeg", "%": "adefg",
   // Uppercase (Control Layer)
@@ -157,7 +157,7 @@
 #let lexicon-entry(input-string, definition) = {
   box(width: 100%, inset: (y: 1.2em), stroke: (bottom: 0.5pt + luma(220)))[
     #stack(dir: ttb, spacing: 1em)[
-      #text(size: 11pt, weight: "bold", font: "monospace")[#input-string]
+      #text(size: 11pt, weight: "bold")[#input-string]
       #grid(
         columns: (120pt, 1fr), gutter: 2em, align: (left + top, left + top),
         // This now feeds the contiguous string into our updated character parser

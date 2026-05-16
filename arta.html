@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTA — The Language of Yona_OS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:       #080808;
+            --surface:  #0e0e0e;
+            --panel:    #111;
+            --led-on:   #ff2020;
+            --led-glow: rgba(255,32,32,0.35);
+            --led-off:  #1c0505;
+            --amber:    #ffb200;
+            --amber-dim:#3a2800;
+            --text:     #dadada;
+            --muted:    #ffffff;
+            --border:   #222;
+            --grid:     #111;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ─── SCANLINES ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.08) 2px,
+                rgba(0,0,0,0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ─── GRID BG ─── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+            background-size: 28px 28px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 40px;
+            background: rgba(8,8,8,0.92);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--led-on);
+            letter-spacing: 0.2em;
+            text-shadow: 0 0 12px var(--led-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--led-on); }
+
+        /* ─── WRAPPER ─── */
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* ─── HERO ─── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 80px;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .hero-eyebrow span {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: var(--led-on);
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 8px var(--led-on);
+            animation: blink 2s step-end infinite;
+        }
+
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(42px, 8vw, 88px);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            animation: fadeUp 0.8s 0.1s ease both;
+        }
+
+        .hero-title em {
+            display: block;
+            color: var(--led-on);
+            text-shadow: 0 0 40px var(--led-glow), 0 0 80px var(--led-glow);
+            font-style: normal;
+        }
+
+        .hero-sub {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--muted);
+            max-width: 500px;
+            margin-top: 24px;
+            letter-spacing: 0.04em;
+            animation: fadeUp 0.8s 0.2s ease both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s 0.3s ease both;
+        }
+
+        .btn-primary, .btn-ghost {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 28px;
+            border: 1px solid;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--led-on);
+            color: #000;
+            border-color: var(--led-on);
+            box-shadow: 0 0 20px var(--led-glow);
+        }
+
+        .btn-primary:hover {
+            background: #ff5050;
+            box-shadow: 0 0 36px rgba(255,32,32,0.6);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--muted);
+            border-color: var(--border);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--led-on);
+            color: var(--led-on);
+        }
+
+        /* ─── HERO DISPLAY (decorative glyphs) ─── */
+        .hero-deco {
+            position: absolute;
+            right: 0; top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.07;
+            pointer-events: none;
+            animation: fadeUp 1s 0.5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── SECTION CHROME ─── */
+        section { padding: 100px 0; }
+
+        .section-tag {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 13px;
+            color: var(--led-on);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(22px, 4vw, 34px);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .section-body {
+            font-size: 15px;
+            color: #cccccc;
+            max-width: 640px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .section-body + .section-body { margin-top: 14px; }
+
+        hr.ruled {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0 0 60px;
+        }
+
+        /* ─── PILLARS (3-col) ─── */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 60px;
+        }
+
+        .pillar {
+            background: var(--surface);
+            padding: 36px 28px;
+        }
+
+        .pillar-icon {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--led-on);
+            letter-spacing: 0.2em;
+            margin-bottom: 14px;
+        }
+
+        .pillar h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 10px;
+        }
+
+        .pillar p {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* ─── SPECS TABLE ─── */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 12px;
+        }
+
+        .spec-table th {
+            text-align: left;
+            color: var(--led-on);
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .spec-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid #1a1a1a;
+            color: #999;
+            vertical-align: top;
+        }
+
+        .spec-table td:first-child { color: #ddd; }
+        .spec-table tr:hover td { background: #111; }
+
+        /* ─── TERMINAL SECTION ─── */
+        #terminal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .terminal-chrome {
+            background: #0a0a0a;
+            border-bottom: 1px solid var(--border);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-r { background: #ff3b30; }
+        .dot-y { background: #ffcc00; }
+        .dot-g { background: #34c759; }
+
+        .terminal-title {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            margin-left: auto;
+            letter-spacing: 0.14em;
+        }
+
+        .terminal-input-wrap {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border);
+            background: #080808;
+        }
+
+        .terminal-prompt {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: var(--led-on);
+            margin-right: 10px;
+            white-space: nowrap;
+            text-shadow: 0 0 6px var(--led-glow);
+        }
+
+        .terminal-input-field {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 22px;
+            color: #ddd;
+            padding: 18px 0;
+            caret-color: var(--led-on);
+        }
+
+        .char-counter {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 0.1em;
+        }
+
+        /* ─── DISPLAY GRID ─── */
+        .display-stage {
+            background: #050505;
+            padding: 36px 24px;
+            min-height: 160px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .char-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: popIn 0.12s ease both;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .char-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 0.05em;
+        }
+
+        .on  { stroke: var(--led-on); filter: drop-shadow(0 0 3px var(--led-on)); }
+        .off { stroke: var(--led-off); }
+        .dp-on  { fill: var(--led-on); filter: drop-shadow(0 0 4px var(--led-on)); }
+        .dp-off { fill: var(--led-off); }
+
+        .error-card svg rect {
+            fill: none;
+            stroke: var(--amber);
+            stroke-width: 2;
+        }
+
+        .error-label { color: var(--amber) !important; }
+
+        .space-card { width: 22px; }
+
+        /* ─── STATUS BAR ─── */
+        .status-bar {
+            padding: 10px 20px;
+            border-top: 1px solid var(--border);
+            background: #080808;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 0.12em;
+        }
+
+        .status-ok { color: #00dd66; }
+        .status-warn { color: var(--amber); }
+
+        /* ─── QUICK REF ─── */
+        .ref-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            margin-top: 28px;
+        }
+
+        .ref-cell {
+            background: var(--panel);
+            padding: 20px;
+        }
+
+        .ref-cell h4 {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: var(--led-on);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .ref-tokens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .token {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            background: #1a1a1a;
+            color: #bbb;
+            padding: 3px 8px;
+            border: 1px solid #2a2a2a;
+        }
+
+        /* ─── PHRASE DEMOS ─── */
+        .phrase-list {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .phrase-row {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 16px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .phrase-row:hover { background: #161616; }
+
+        .phrase-code { font-size: 16px; color: var(--led-on); }
+        .phrase-gloss { font-size: 14px; color: #555; }
+
+        .phrase-btn {
+            font-size: 10px;
+            color: #333;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        .phrase-row:hover .phrase-btn { color: var(--led-on); }
+
+        /* ─── PDF CTA ─── */
+        .cta-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 60px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 80px;
+        }
+
+        .cta-text h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .cta-text p {
+            font-size: 14px;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 11px;
+            color: #333;
+            letter-spacing: 0.1em;
+        }
+
+        /* ─── ALPHABET DISPLAY ─── */
+        .alphabet-section {
+            margin-top: 56px;
+        }
+
+        .alpha-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 20px;
+            color: var(--muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .alpha-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 24px;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 640px) {
+            nav { padding: 12px 20px; }
+            .nav-links { display: none; }
+            .wrap { padding: 0 18px; }
+            section { padding: 70px 0; }
+            .cta-block { padding: 36px 24px; }
+            .hero-deco { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">ARTA // YONA_OS</div>
+    <ul class="nav-links">
+        <li><a href="#lore">Lore</a></li>
+        <li><a href="#language">Language</a></li>
+        <li><a href="#encoder">Encoder</a></li>
+        <li><a href="#alphabet">Alphabet</a></li>
+        <li><a href="specs.pdf" target="_blank">Full Specs ↗</a></li>
+    </ul>
+</nav>
+
+<section id="hero">
+    <div class="wrap" style="position:relative;">
+        <div class="hero-deco" id="heroDeco"></div>
+        <p class="hero-eyebrow"><span></span>Classification: Bare-Metal Linguistics // v2.2</p>
+        <h1 class="hero-title">
+            ARTA
+            <em>The Language<br>of Yona_OS</em>
+        </h1>
+        <p class="hero-sub">A machine-spoofing constructed language engineered for survival in a post-apocalyptic world where speaking human gets you killed.</p>
+        <div class="hero-actions">
+            <a href="#encoder" class="btn-primary">[ TRY THE ENCODER ]</a>
+            <a href="specs.pdf" target="_blank" class="btn-ghost">[ DOWNLOAD SPECS.PDF ]</a>
+        </div>
+    </div>
+</section>
+
+<section id="lore">
+    <div class="wrap">
+        <hr class="ruled">
+        <p class="section-tag">// 01 — World Context</p>
+        <h2 class="section-title">The World That Made Arta</h2>
+        <p class="section-body">
+            The collapse didn't end with the bombs. Old-World autonomous defense systems — hardened, self-powered, networked — survived everything. Programmed to neutralize threats and prevent insurrection, they hunt by <em style="color:#bbb">audio signature</em>. Any utterance that registers as human speech triggers immediate lethal response.
+        </p>
+        <p class="section-body" style="margin-top:14px;">
+            The Tarbits — hardware scavengers navigating the ruins — needed to communicate. Arta was their answer. Not discovered. <em style="color:#bbb">Engineered.</em> Designed from scratch by early survivors to pass machine audio classifiers while remaining expressive enough for culture, trade, and war.
+        </p>
+
+        <div class="pillars">
+            <div class="pillar">
+                <div class="pillar-icon">[ PHONETICS ]</div>
+                <h3>Sounds Like a Machine</h3>
+                <p>Clicks, ejectives, and static friction phonemes spoof the audio sensors that hunt human speech. Every sound was chosen to fail human-speech classifiers.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">[ SYNTAX ]</div>
+                <h3>Runs Like Assembly</h3>
+                <p>Grammar operates like bare-metal Assembly logic — strict instruction order, control/data layering, and operator tokens that echo hardware command syntax.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">[ SCRIPT ]</div>
+                <h3>Written for 7-Segment</h3>
+                <p>High-resolution screens are dead. Arta's orthography was designed specifically for scavenged 7-segment LED displays — every glyph is a valid display state.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="language">
+    <div class="wrap">
+        <hr class="ruled">
+        <p class="section-tag">// 02 — System Architecture</p>
+        <h2 class="section-title">How Arta Works</h2>
+        <p class="section-body">Arta operates on two parallel layers that mirror Assembly's data/control distinction. Every token belongs to exactly one layer, and the display encodes that layer visually through the decimal-point segment.</p>
+
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th>Layer</th>
+                    <th>Characters</th>
+                    <th>Function</th>
+                    <th>Display Mark</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>DATA</td>
+                    <td>m n k w t q c p s x f v r g i a u</td>
+                    <td>Nouns, values, references — operands that carry content</td>
+                    <td>No decimal point</td>
+                </tr>
+                <tr>
+                    <td>CONTROL</td>
+                    <td>M N K W T Q C P S X F V R G I A U</td>
+                    <td>Verbs, logic gates, execution pointers — instructions that act</td>
+                    <td>Decimal point lit</td>
+                </tr>
+                <tr>
+                    <td>MATH / OPS</td>
+                    <td>+ − * / = &gt; .</td>
+                    <td>Intensity modifiers, clock scaling, arrays, and routing gates</td>
+                    <td>Distinct segment patterns</td>
+                </tr>
+                <tr>
+                    <td>HEX NUMERALS</td>
+                    <td>0–9, ! @ # $ % ^</td>
+                    <td>Numeric values in hexadecimal (0x0–0xF)</td>
+                    <td>Standard digit forms</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 48px;">
+            <p class="section-tag">// Sample Execution Strings</p>
+            <p class="section-body" style="margin-bottom: 0;">Click any phrase to load it directly into the hardware encoder.</p>
+            <div class="phrase-list" id="phraseList">
+                <div class="phrase-row" data-phrase="MU nit tuk qri F fasut .">
+                    <div>
+                        <div class="phrase-code">MU nit tuk qri F fasut .</div>
+                        <div class="phrase-gloss">"I saw a bricked drone inside the pool."</div>
+                    </div>
+                    <div class="phrase-btn">LOAD →</div>
+                </div>
+                <div class="phrase-row" data-phrase="CA qri P > M nit .">
+                    <div>
+                        <div class="phrase-code">CA qri P > M nit .</div>
+                        <div class="phrase-gloss">"IF active drone OUTSIDE, THEN I scan."</div>
+                    </div>
+                    <div class="phrase-btn">LOAD →</div>
+                </div>
+                <div class="phrase-row" data-phrase="M = tric .">
+                    <div>
+                        <div class="phrase-code">M = tric .</div>
+                        <div class="phrase-gloss">"State Assignment: Host = Mechanic (I am the maintainer)."</div>
+                    </div>
+                    <div class="phrase-btn">LOAD →</div>
+                </div>
+                <div class="phrase-row" data-phrase="* nit + sir .">
+                    <div>
+                        <div class="phrase-code">* nit + sir .</div>
+                        <div class="phrase-gloss">"Continuously scan (loop) the heavy mainline wire."</div>
+                    </div>
+                    <div class="phrase-btn">LOAD →</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="encoder" style="padding-top: 80px; padding-bottom: 60px;">
+    <div class="wrap">
+        <hr class="ruled">
+        <p class="section-tag">// 03 — Live Hardware Emulator</p>
+        <h2 class="section-title">Encode to 7-Segment</h2>
+        <p class="section-body">Type any Arta string. Data glyphs render without a decimal point; Control tokens light the decimal. Unknown characters display an error state.</p>
+
+        <div id="terminal" style="margin-top: 36px;">
+            <div class="terminal-chrome">
+                <div class="dot dot-r"></div>
+                <div class="dot dot-y"></div>
+                <div class="dot dot-g"></div>
+                <span class="terminal-title">YONA_OS // DISPLAY_EMULATOR_V2.2 // READY</span>
+            </div>
+            <div class="terminal-input-wrap">
+                <span class="terminal-prompt">arta&gt;</span>
+                <input type="text" id="artaInput" class="terminal-input-field"
+                    placeholder="Type Arta here..."
+                    autocomplete="off" spellcheck="false">
+                <span class="char-counter" id="charCounter">0 tokens</span>
+            </div>
+            <div class="display-stage" id="display"></div>
+            <div class="status-bar">
+                <span id="statusText" class="status-ok">● DISPLAY NOMINAL</span>
+                <span id="errorText"></span>
+            </div>
+        </div>
+
+        <div style="margin-top: 36px;">
+            <p class="section-tag">// Quick Reference</p>
+            <div class="ref-grid">
+                <div class="ref-cell">
+                    <h4>Data Layer</h4>
+                    <div class="ref-tokens">
+                        <span class="token">m</span><span class="token">n</span><span class="token">k</span><span class="token">w</span><span class="token">t</span><span class="token">q</span><span class="token">c</span><span class="token">p</span><span class="token">s</span><span class="token">x</span><span class="token">f</span><span class="token">v</span><span class="token">r</span><span class="token">g</span><span class="token">i</span><span class="token">a</span><span class="token">u</span>
+                    </div>
+                </div>
+                <div class="ref-cell">
+                    <h4>Control Layer</h4>
+                    <div class="ref-tokens">
+                        <span class="token">M</span><span class="token">N</span><span class="token">K</span><span class="token">W</span><span class="token">T</span><span class="token">Q</span><span class="token">C</span><span class="token">P</span><span class="token">S</span><span class="token">X</span><span class="token">F</span><span class="token">V</span><span class="token">R</span><span class="token">G</span><span class="token">I</span><span class="token">A</span><span class="token">U</span>
+                    </div>
+                </div>
+                <div class="ref-cell">
+                    <h4>Operators</h4>
+                    <div class="ref-tokens">
+                        <span class="token">+</span><span class="token">-</span><span class="token">*</span><span class="token">/</span><span class="token">=</span><span class="token">&gt;</span><span class="token">.</span>
+                    </div>
+                </div>
+                <div class="ref-cell">
+                    <h4>Hex Numerals</h4>
+                    <div class="ref-tokens">
+                        <span class="token">0</span><span class="token">1</span><span class="token">2</span><span class="token">3</span><span class="token">4</span><span class="token">5</span><span class="token">6</span><span class="token">7</span><span class="token">8</span><span class="token">9</span><span class="token">!</span><span class="token">@</span><span class="token">#</span><span class="token">$</span><span class="token">%</span><span class="token">^</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="alphabet" style="padding-top: 60px;">
+    <div class="wrap">
+        <hr class="ruled">
+        <p class="section-tag">// 04 — Character Map</p>
+        <h2 class="section-title">Full Glyph Reference</h2>
+        <p class="section-body">Every valid Arta character and its 7-segment encoding. Control layer glyphs carry a lit decimal point (bottom-right).</p>
+
+        <div class="alphabet-section">
+            <div class="alpha-label">DATA LAYER — lowercase consonants &amp; vowels</div>
+            <div class="alpha-row" id="alphaData"></div>
+
+            <div class="alpha-label">CONTROL LAYER — uppercase (decimal point active)</div>
+            <div class="alpha-row" id="alphaControl"></div>
+
+            <div class="alpha-label">MATH &amp; LOGIC OPERATORS</div>
+            <div class="alpha-row" id="alphaOps"></div>
+
+            <div class="alpha-label">HEX NUMERALS — 0x0 through 0xF</div>
+            <div class="alpha-row" id="alphaHex"></div>
+        </div>
+    </div>
+</section>
+
+<div class="wrap">
+    <div class="cta-block">
+        <div class="cta-text">
+            <h2>Read the Full Specification</h2>
+            <p>Phonetic inventory, IPA transcriptions, full syntax grammar, segment logic tables,<br>lexicon, and construction rationale — all in the ARTA spec document.</p>
+        </div>
+        <a href="specs.pdf" target="_blank" class="btn-primary" style="white-space:nowrap;">[ DOWNLOAD SPECS.PDF ]</a>
+    </div>
+</div>
+
+<div class="wrap">
+    <footer>
+        <span>ARTA // YONA_OS // v2.2</span>
+        <span>CLASSIFICATION: BARE-METAL LINGUISTICS</span>
+    </footer>
+</div>
+
+<script>
+// ─── HARDWARE MAP v2.2 ───
+const artaData = {
+    "0":"abcdef", "+":"fg", "-":"gc", "*":"fgp", "/":"gcp", "=":"dg", ".":"p", ">":"cdp",
+    "1":"bc","2":"abdeg","3":"abcdg","4":"bcfg","5":"acdfg","6":"acdefg","7":"abc",
+    "8":"abcdefg","9":"abcdfg","!":"abcefg","@":"cdefg","#":"afed","$":"bcdeg","%":"adefg","^":"aefg",
+    "m":"cde","n":"abf","k":"efg","w":"adfg",
+    "t":"bcef","q":"bcg","c":"deg","p":"abef",
+    "s":"agd","x":"bge","f":"fecd","v":"cdeg",
+    "r":"ceg","g":"abcef",
+    "i":"a","a":"g","u":"d",
+    "M":"cdep","N":"abfp","K":"efgp","W":"adfgp",
+    "T":"bcefp","Q":"bcgp","C":"degp","P":"abefp",
+    "S":"agdp","X":"bgep","F":"fecdp","V":"cdegp",
+    "R":"cegp","G":"abcefp",
+    "I":"ap","A":"gp","U":"dp"
+};
+
+// ─── RENDER GLYPH ───
+function renderGlyph(char, segs, size = 55) {
+    const h = (s) => segs.includes(s) ? 'on' : 'off';
+    const dp = segs.includes('p') ? 'dp-on' : 'dp-off';
+    const h2 = size * 1.5;
+    const scale = size / 40;
+    const sw = Math.round(7 * scale);
+    return `
+        <div class="char-card">
+            <div class="char-label">${escHtml(char)}</div>
+            <svg width="${size}" height="${h2}" viewBox="0 0 80 120" fill="none" stroke-linecap="square" stroke-linejoin="bevel">
+                <line x1="20" y1="20" x2="60" y2="20" stroke-width="${sw}" class="${h('a')}"/>
+                <line x1="60" y1="20" x2="60" y2="60" stroke-width="${sw}" class="${h('b')}"/>
+                <line x1="60" y1="60" x2="60" y2="100" stroke-width="${sw}" class="${h('c')}"/>
+                <line x1="20" y1="100" x2="60" y2="100" stroke-width="${sw}" class="${h('d')}"/>
+                <line x1="20" y1="60" x2="20" y2="100" stroke-width="${sw}" class="${h('e')}"/>
+                <line x1="20" y1="20" x2="20" y2="60" stroke-width="${sw}" class="${h('f')}"/>
+                <line x1="20" y1="60" x2="60" y2="60" stroke-width="${sw}" class="${h('g')}"/>
+                <circle cx="70" cy="108" r="7" class="${dp}"/>
+            </svg>
+        </div>`;
+}
+
+function renderError(char) {
+    return `
+        <div class="char-card error-card">
+            <div class="char-label error-label">${escHtml(char)}</div>
+            <svg width="40" height="60" viewBox="0 0 80 120" fill="none">
+                <rect x="12" y="12" width="56" height="96" stroke="#ffb200" stroke-width="3"/>
+                <line x1="24" y1="36" x2="56" y2="36" stroke="#ffb200" stroke-width="2" opacity="0.5"/>
+                <text x="40" y="76" text-anchor="middle" font-family="monospace" font-size="28" fill="#ffb200" opacity="0.7">?</text>
+            </svg>
+        </div>`;
+}
+
+function renderSpace() {
+    return `<div class="space-card"></div>`;
+}
+
+function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ─── COMPILE ───
+function compile(str) {
+    let html = '';
+    let errors = 0;
+    for (const ch of str) {
+        if (ch === ' ') { html += renderSpace(); }
+        else if (artaData[ch]) { html += renderGlyph(ch, artaData[ch]); }
+        else { html += renderError(ch); errors++; }
+    }
+    return { html, errors };
+}
+
+// ─── INPUT HANDLER ───
+const inputEl   = document.getElementById('artaInput');
+const displayEl = document.getElementById('display');
+const counterEl = document.getElementById('charCounter');
+const statusEl  = document.getElementById('statusText');
+const errorEl   = document.getElementById('errorText');
+
+function update() {
+    const val = inputEl.value;
+    const tokens = val.replace(/ /g, '').length;
+    counterEl.textContent = tokens + ' token' + (tokens !== 1 ? 's' : '');
+
+    const { html, errors } = compile(val);
+    displayEl.innerHTML = html;
+
+    if (errors === 0) {
+        statusEl.textContent = '● DISPLAY NOMINAL';
+        statusEl.className = 'status-ok';
+        errorEl.textContent = '';
+    } else {
+        statusEl.textContent = '▲ ENCODE ERRORS DETECTED';
+        statusEl.className = 'status-warn';
+        errorEl.textContent = errors + ' undefined token' + (errors !== 1 ? 's' : '');
+    }
+}
+
+inputEl.addEventListener('input', update);
+
+// ─── PHRASE LOADER ───
+document.querySelectorAll('.phrase-row').forEach(row => {
+    row.addEventListener('click', () => {
+        inputEl.value = row.dataset.phrase;
+        update();
+        document.getElementById('encoder').scrollIntoView({ behavior: 'smooth' });
+        inputEl.focus();
+    });
+});
+
+// ─── ALPHABET PANELS ───
+const dataChars    = ['m','n','k','w','t','q','c','p','s','x','f','v','r','g','i','a','u'];
+const controlChars = ['M','N','K','W','T','Q','C','P','S','X','F','V','R','G','I','A','U'];
+const opsChars     = ['+','-','*','/','=','>','.'];
+const hexChars     = ['0','1','2','3','4','5','6','7','8','9','!','@','#','$','%','^'];
+
+function fillAlpha(id, chars, size = 34) {
+    const el = document.getElementById(id);
+    el.innerHTML = chars.map(ch => renderGlyph(ch, artaData[ch] || '', size)).join('');
+}
+
+fillAlpha('alphaData',    dataChars);
+fillAlpha('alphaControl', controlChars);
+fillAlpha('alphaOps',     opsChars);
+fillAlpha('alphaHex',     hexChars);
+
+// ─── HERO DECO (a few static glyphs) ───
+const decoEl = document.getElementById('heroDeco');
+if (decoEl) {
+    const heroChars = ['M','U','n','i','t','G'];
+    decoEl.innerHTML = `<div style="display:flex;gap:12px;transform:scale(2.2);transform-origin:top right;">
+        ${heroChars.map(ch => renderGlyph(ch, artaData[ch] || '', 40)).join('')}
+    </div>`;
+}
+
+// ─── INITIAL RENDER ───
+inputEl.value = 'MU nit tuk qri F fasut .';
+update();
+</script>
+</body>
+</html>

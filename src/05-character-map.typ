@@ -32,27 +32,27 @@ This appendix serves as the master register for field-scraping.
 
 == 2. System States and ALU
 #grid(
-  columns: (1fr, 1fr, 1fr, 1fr),
+  columns: (1fr, 1fr),
   gutter: 1.5em,
-  [ *0* (Null) \ #arta("0") ],
-  [ *^* (Max/Full) \ #arta("^") ],
-  [ *.* (Execute) \ #arta(".") ],
   [ *=* (Assign) \ #arta("=") ],
-  
+  [ *>* (redirect) \ #arta(">") ],
   [ *+* (Inc) \ #arta("+") ],
-  [ *-* (Dec) \ #arta("-") ],
   [ *\** (Loop) \ #arta("*") ],
-  [ *\/* (Frag) \ #arta("/") ]
+  [ *-* (Dec) \ #arta("-") ],
+  [ *\/* (Frag) \ #arta("/") ],
+  [ *.* (Execute) \ #arta(".") ],
 )
 
 == 3. Hexadecimal Numerals (Base-16)
-*(Note: Upper hex digits A-E are mapped to the Shift+1-5 keys for dedicated physical hardware routing).*
+*(Note: Upper hex digits A-F are mapped to the Shift+1-6 keys for dedicated physical hardware routing).*
 
 #grid(
   columns: (1fr, 1fr, 1fr, 1fr),
   gutter: 1.5em,
-  [ *1* \ #arta("1")], [ *2* \ #arta("2")], [ *3* \ #arta("3")], [ *4* \ #arta("4")],
-  [ *5* \ #arta("5")], [ *6* \ #arta("6")], [ *7* \ #arta("7")], [ *8* \ #arta("8")],
-  [ *9* \ #arta("9")], [ *A* `!` \ #arta("!")], [ *B* `@` \ #arta("@")], [ *C* `#` \ #arta("#")],
-  [ *D* `$` \ #arta("$")], [ *E* `%` \ #arta("%")]
+  
+  [ *0* \ #arta("0") ], [ *1* \ #arta("1")], [ *2* \ #arta("2")], [ *3* \ #arta("3")],
+  [ *4* \ #arta("4")], [ *5* \ #arta("5")], [ *6* \ #arta("6")], [ *7* \ #arta("7")],
+  [ *8* \ #arta("8")], [ *9* \ #arta("9")], [ *A* `!` \ #arta("!")], [ *B* `@` \ #arta("@")],
+  [ *C* `#` \ #arta("#")], [ *D* `$` \ #arta("$")], [ *E* `%` \ #arta("%")], [ *F* `^` \ #arta("^") ],
 )
+

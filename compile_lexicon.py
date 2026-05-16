@@ -20,7 +20,7 @@ ARTA_ALPHABET = [
     "I", "A", "U",               # Timelines
     
     # System Keys
-    "+", "-", "*", "/", "=",     # ALU
+    "+", "-", "\\*", "/", "=",     # ALU
     ".", ".."                    # Execute
 ]
 
@@ -113,7 +113,8 @@ def compile_lexicon():
                 f.write(f"== SECTOR [ {current_sector} ] // {hardware_desc.upper()}\n\n")
 
             definition = db[word]
-            safe_def = definition.replace('"', '\\"') 
+            safe_def = definition.replace('"', '\\"')
+            safe_def = safe_def.replace('*', '\\*')
             f.write(f'#lexicon-entry("{word}", "{safe_def}")\n')
 
     print(f"[+] Output compiled successfully to {OUTPUT_FILE}")

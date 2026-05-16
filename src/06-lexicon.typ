@@ -188,7 +188,37 @@
 #lexicon-entry("U", "modifier: [LOGGED] Indicates an action that has concluded and written to memory (Past).")
 
 // ========================================
+== SECTOR [ + ] // SYSTEM LOGIC
+
+#lexicon-entry("+", "modifier: [INCREMENT] Scales a noun to a heavy/maximum state, or executes a verb at a highly accelerated clock speed (faster).")
+
+// ========================================
+== SECTOR [ - ] // SYSTEM LOGIC
+
+#lexicon-entry("-", "modifier: [DECREMENT] Scales a noun to a light/minimum state, or executes a verb at a throttled clock speed (slower).")
+
+// ========================================
+== SECTOR [ / ] // SYSTEM LOGIC
+
+#lexicon-entry("/", "modifier: [DIVIDE] Physically fragments a noun into a fraction, piece, or drop.")
+
+// ========================================
+== SECTOR [ = ] // SYSTEM LOGIC
+
+#lexicon-entry("=", "modifier: [NOMINAL] Defines a noun at a stable, standard, or baseline state.")
+
+// ========================================
 == SECTOR [ . ] // SYSTEM LOGIC
 
 #lexicon-entry(".", "modifier: [EXECUTION TRIGGER] The Hardware Bus. Acts as a 'THEN' gate.")
 #lexicon-entry("..", "modifier: [SYSTEM HALT / EOF] End of File. Clears all active thread contexts.")
+
+// ========================================
+== SECTOR [ \* ] // SYSTEM LOGIC
+
+#lexicon-entry("*", "modifier: [MULTIPLY] Allocates a plural array of a noun, or executes a verb in a continuous, repeated loop.")
+
+// ========================================
+== SECTOR [ > ] // SYSTEM LOGIC
+
+#lexicon-entry(">", "modifier: [REDIRECT GATE] The Shifted Bus. Acts as a 'THEN' trigger for logic gates, or a direct copula (assignment) for memory states.")

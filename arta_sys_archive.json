@@ -41,5 +41,12 @@
     "..": "modifier: [SYSTEM HALT / EOF] End of File. Clears all active thread contexts.",
     "nit": "verb: To execute an optical fetch or visual ping of the immediate environment.",
     "fasut": "noun: A static liquid storage matrix, coolant vat, or uncirculated slurry basin.",
-    "tuk": "modifier: A physical hardware component that is present but permanently unfunctional; a bricked or burned-out circuit."
+    "tuk": "modifier: A physical hardware component that is present but permanently unfunctional; a bricked or burned-out circuit.",
+    "+": "modifier: [INCREMENT] Scales a noun to a heavy/maximum state, or executes a verb at a highly accelerated clock speed (faster).",
+    "-": "modifier: [DECREMENT] Scales a noun to a light/minimum state, or executes a verb at a throttled clock speed (slower).",
+    "=": "modifier: [NOMINAL] Defines a noun at a stable, standard, or baseline state.",
+    "*": "modifier: [MULTIPLY] Allocates a plural array of a noun, or executes a verb in a continuous, repeated loop.",
+    "/": "modifier: [DIVIDE] Physically fragments a noun into a fraction, piece, or drop.",
+    ">": "modifier: [REDIRECT GATE] The Shifted Bus. Acts as a 'THEN' trigger for logic gates, or a direct copula (assignment) for memory states.",
+    "tric": "noun: A mechanic, maintainer, or diagnostic unit. One who repairs hardware."
 }

@@ -37,3 +37,46 @@ Vowels require the vocal cords to vibrate, creating a measurable pitch. Therefor
 - *[i]* (High State): Whispered high in the mouth. 
 - *[a]* (Neutral State): Whispered with an open mouth. 
 - *[u]* (Low State): Whispered with rounded lips.
+
+== 3. The Acoustic Frequency Matrix (IPA Standard)
+
+To interface with legacy Old World linguistic databases, the Arta phonetic inventory maps directly to the International Phonetic Alphabet (IPA) grid. Note the complete absence of standard voiced pulmonic stops (b, d) and true vowels. 
+
+> CONSONANT INVENTORY (THE HARDWARE MATRIX)
+#v(0.5em)
+
+#block[
+  #set text(size: 8.5pt) 
+  #table(
+    columns: (auto, auto, auto, auto, auto, auto, auto, auto),
+    align: center + horizon,
+    stroke: 0.5pt + rgb("#111111"),
+    fill: (col, row) => if row == 0 or col == 0 { rgb("#e5e5e0") } else { none },
+    
+    align(left)[*MANNER \/\/ PLACE*], [*BILABIAL*], [*LABIODENT*], [*DENTAL*], [*ALVEOLAR*], [*POST-ALV*], [*VELAR*], [*UVULAR*],
+    align(left)[*NASAL (HUM)*], [m `m`], [], [], [n `n`], [], [ŋ `g`], [],
+    align(left)[*BASE (BRACKET)*], [], [], [], [], [], [k `k`], [],
+    align(left)[*FRICATIVE (STATIC)*], [], [f `f`], [], [s `s`], [ʃ `w`], [x `x`], [ʁ `v`],
+    align(left)[*TRILL (MOTOR)*], [], [], [], [r `r`], [], [], [],
+    align(left)[*EJECTIVE (RELAY)*], [pʼ `p`], [], [], [tʼ `t`], [], [], [qʼ `q`],
+    align(left)[*CLICK (SWITCH)*], [], [], [ǀ `c`], [], [], [], []
+  )
+]
+
+#v(1.5em)
+> VOWEL INVENTORY (THE POWER STATES)
+#v(0.5em)
+
+#block[
+  #set text(size: 8.5pt)
+  #table(
+    columns: (auto, 1fr, 1fr, 1fr),
+    align: center + horizon,
+    stroke: 0.5pt + rgb("#111111"),
+    fill: (col, row) => if row == 0 or col == 0 { rgb("#e5e5e0") } else { none },
+    
+    align(left)[*STATE \/\/ POSITION*], [*FRONT*], [*CENTRAL*], [*BACK*],
+    align(left)[*HIGH (ACTIVE/OFF)*], [i `i`], [], [u `u`],
+    align(left)[*OPEN (BASE)*], [], [ə `a`], []
+  )
+]
